@@ -7,21 +7,21 @@ const reviews = [
     name: "김지현",
     date: "2025-08-10",
     rating: 5,
-    comment: "정말 아름다운 청첩장이었어요! 친구들도 모두 칭찬했답니다.",
+    comment: "박종민님 너무 멋져요",
   },
   {
     id: 2,
     name: "이준호",
     date: "2025-08-15",
     rating: 4,
-    comment: "쉬운 사용법과 예쁜 디자인이 마음에 들었어요. 추천합니다!",
+    comment: "강민석님 천재십니다",
   },
   {
     id: 3,
     name: "박수진",
     date: "2025-08-20",
     rating: 5,
-    comment: "맞춤형 디자인 덕분에 특별한 초대장을 만들 수 있었어요.",
+    comment: "김찬우",
   },
 ];
 
