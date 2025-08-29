@@ -10,7 +10,7 @@ const reviews = [
     name: "김지현",
     date: "2025-08-10",
     rating: 5,
-    comment: "정말 아름다운 청첩장이었어요! 친구들도 모두 칭찬했답니다.",
+    comment: "박종민님 멋지십니다",
     photo: img1,
   },
   {
@@ -18,11 +18,35 @@ const reviews = [
     name: "이준호",
     date: "2025-08-15",
     rating: 4,
-    comment: "쉬운 사용법과 예쁜 디자인이 마음에 들었어요. 추천합니다!",
+    comment: "강민석님 이해가 상당히 빠르십니다",
     photo: img2,
   },
   {
     id: 3,
+    name: "박수진",
+    date: "2025-08-20",
+    rating: 5,
+    comment: "맞춤형 디자인 덕분에 특별한 초대장을 만들 수 있었어요.",
+    photo: img3,
+  },
+  {
+    id: 4,
+    name: "박수진",
+    date: "2025-08-20",
+    rating: 5,
+    comment: "맞춤형 디자인 덕분에 특별한 초대장을 만들 수 있었어요.",
+    photo: img3,
+  },
+  {
+    id: 5,
+    name: "박수진",
+    date: "2025-08-20",
+    rating: 5,
+    comment: "맞춤형 디자인 덕분에 특별한 초대장을 만들 수 있었어요.",
+    photo: img3,
+  },
+  {
+    id: 6,
     name: "박수진",
     date: "2025-08-20",
     rating: 5,
@@ -42,8 +66,8 @@ function StarRating({ rating }) {
 
 function CustomerReview() {
   return (
-    <div style={{ maxWidth: "600px", margin: "0 auto", padding: "20px" }}>
-      <h2 style={{ textAlign: "center" }}>고객 후기</h2>
+    <div style={{ maxWidth: "1000px", margin: "0 auto", padding: "10px" }}>
+      <h2 style={{ textAlign: "left" }}>고객 후기</h2>
       {reviews.map((review) => (
         <div
           key={review.id}
