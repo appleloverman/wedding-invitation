@@ -7,7 +7,7 @@ function Header() {
       style={{
         padding: "10px",
         textAlign: "center",
-        backgroundColor: "#fff",
+        backgroundColor: "#f9cee4ff",
         borderBottom: "1px solid #eee",
       }}
     >
