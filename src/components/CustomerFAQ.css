@@ -1,0 +1,146 @@
+.faq-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 60px 20px 40px 20px;
+  font-family: "Noto Sans KR", sans-serif;
+  color: #333;
+  background-color: peachpuff;
+  position: relative;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: visible; /* 내부 요소가 영역 밖으로 나와도 보이도록 */
+}
+
+/* 테두리 패턴을 담당하는 div */
+.faq-border-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 20px;
+  pointer-events: none; /* 클릭 이벤트 무시 */
+  background: url("https://banner2.cleanpng.com/lnd/20241017/pi/d06a30f99dcfc6034c939ebed99496.webp")
+    repeat;
+  padding: 20px;
+  box-sizing: border-box;
+  z-index: 1;
+  mask-image: radial-gradient(circle at center, transparent 70%, black 100%);
+  -webkit-mask-image: radial-gradient(
+    circle at center,
+    transparent 70%,
+    black 100%
+  );
+}
+
+/* 중앙 상단 이미지 div */
+.faq-center-image {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 120px;
+  background-image: url("https://banner2.cleanpng.com/lnd/20241017/ku/0411e8a153f2e1688bae227513556b.webp");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.faq-wrapper {
+  position: relative;
+  z-index: 20;
+  padding-top: 140px; /* 이미지 아래로 밀기 */
+}
+
+/* 이하 기존 스타일 유지 */
+.faq-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.faq-subtitle {
+  text-align: center;
+  color: #888;
+  margin-bottom: 30px;
+  font-size: 16px;
+}
+
+.faq-search {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.faq-search input {
+  width: 70%;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.faq-search input:focus {
+  border-color: #ff6b6b;
+  box-shadow: 0 0 5px rgba(255, 107, 107, 0.3);
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.faq-item {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 15px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.faq-item:hover {
+  background: #f9f9f9;
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+  font-size: 16px;
+  color: #444;
+}
+
+.faq-q-icon {
+  font-weight: bold;
+  color: #ff6b6b;
+  margin-right: 8px;
+}
+
+.faq-toggle-icon {
+  font-size: 14px;
+  color: #aaa;
+}
+
+.faq-answer {
+  margin-top: 12px;
+  padding-left: 8px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #555;
+}
+
+.faq-empty {
+  text-align: center;
+  color: #aaa;
+  padding: 40px 0;
+  font-size: 16px;
+}
