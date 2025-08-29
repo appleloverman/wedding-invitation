@@ -53,6 +53,14 @@ const reviews = [
     comment: "맞춤형 디자인 덕분에 특별한 초대장을 만들 수 있었어요.",
     photo: img3,
   },
+  {
+    id: 7,
+    name: "박수진",
+    date: "2025-08-20",
+    rating: 5,
+    comment: "맞춤형 디자인 덕분에 특별한 초대장을 만들 수 있었어요.",
+    photo: img3,
+  },
 ];
 
 function StarRating({ rating }) {
