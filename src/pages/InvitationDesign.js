@@ -1,16 +1,38 @@
 import { useState } from "react";
 
-function InvitationDesign() {
+function InvitationDesign({ invitationList, setInvitationList }) {
+  console.log("InvitationDesignProps:", invitationList);
+  const [ino, setIno] = useState(1);
   const [date, setDate] = useState("2025-08-29");
   const [time, setTime] = useState("12:00");
   const [groomName, setGroomName] = useState("홍길동");
   const [brideName, setBrideName] = useState("김영희");
   const [theme, setTheme] = useState("classic");
 
+  const setInvitationHandler = () => {
+    setInvitationList([
+      ...invitationList,
+      {
+        ino: ino + 1,
+        date: date,
+        time: time,
+        groomName: groomName,
+        brideName: brideName,
+        theme: theme,
+      },
+    ]);
+    setIno(ino + 1);
+  };
+
+  const deleteInvitationHandler = (ino) => {
+    setInvitationList(invitationList.filter((i) => i.ino !== ino));
+  };
+
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* 왼쪽: 청첩장 미리보기 */}
-      <div className="flex-1 flex items-center justify-center p-6">
+
+      <div key={ino} className="flex-1 flex items-center justify-center p-6">
         <div className="w-[375px] h-[667px] bg-white shadow-lg rounded-xl p-6 text-center">
           <h2 className="text-gray-500 text-sm">{date}</h2>
           <p className="text-gray-500 mb-4">{time}</p>
@@ -84,7 +106,10 @@ function InvitationDesign() {
           </select>
         </div>
 
-        <button className="w-full bg-blue-500 text-white py-2 rounded">
+        <button
+          className="w-full bg-blue-500 text-white py-2 rounded"
+          onClick={() => setInvitationHandler()}
+        >
           저장하기
         </button>
       </div>

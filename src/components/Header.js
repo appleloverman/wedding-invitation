@@ -7,7 +7,7 @@ function Header() {
       style={{
         padding: "10px",
         textAlign: "center",
-        backgroundColor: "#f9cee4ff",
+        backgroundColor: "#fff",
         borderBottom: "1px solid #eee",
       }}
     >
@@ -25,6 +25,7 @@ function Header() {
         <Link to="/FAQ">자주 묻는 질문</Link>
         <Link to="/login">로그인</Link>
         <Link to="/contact">현재미정</Link>
+        <Link to="/InvitationList">모바일 청첩장 List</Link>
       </nav>
     </header>
   );

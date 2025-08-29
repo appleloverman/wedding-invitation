@@ -120,7 +120,7 @@ function Home() {
               marginBottom: "12px",
             }}
           >
-            오프닝 애니메이션
+            오프닝 애니메이션 A
           </h3>
           <p style={{ marginBottom: "16px" }}>
             열리는 순간, 시선을 사로잡는 감각적인 연출
