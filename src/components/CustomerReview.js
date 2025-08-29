@@ -7,7 +7,7 @@ import img3 from "../art/abc3.jpg";
 const reviews = [
   {
     id: 1,
-    name: "김지현",
+    name: "박종민",
     date: "2025-08-10",
     rating: 5,
     comment: "박종민님 멋지십니다",
