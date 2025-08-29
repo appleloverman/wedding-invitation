@@ -238,7 +238,7 @@ function Home() {
       {/* ===== 오시는 길 Section ===== */}
       <section className="py-12 px-4 text-center bg-white text-black">
         <h2 className="text-2xl font-bold">오시는 길</h2>
-        <p className="mt-2">서울특별시 강남구 테헤란로 123</p>
+        <p className="mt-2">성남 그린 아카데미</p>
 
         <div className="mt-6 flex justify-center">
           <iframe
