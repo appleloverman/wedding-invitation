@@ -15,7 +15,7 @@ const reviews = [
   },
   {
     id: 2,
-    name: "이준호",
+    name: "강민석",
     date: "2025-08-15",
     rating: 4,
     comment: "강민석님 이해가 상당히 빠르십니다",
@@ -23,7 +23,7 @@ const reviews = [
   },
   {
     id: 3,
-    name: "박수진",
+    name: "김찬우",
     date: "2025-08-20",
     rating: 5,
     comment: "맞춤형 디자인 덕분에 특별한 초대장을 만들 수 있었어요.",
