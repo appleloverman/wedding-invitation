@@ -11,6 +11,8 @@ import Ticket from "./pages/Ticket";
 import InvitationList from "./pages/InvitationList";
 import Letter from "./pages/Letter";
 import Frame from "./pages/Frame";
+import InvitationEdit from "./pages/InvitationEdit";
+
 
 const HEADER_HEIGHT = 60;
 
@@ -32,15 +34,9 @@ function App() {
       <main style={{ marginTop: `${HEADER_HEIGHT}px` }}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route
-            path="/InvitationDesign"
-            element={
-              <InvitationDesign
-                invitationList={invitationList}
-                setInvitationList={setInvitationList}
-              />
-            }
-          />
+          <Route path="/InvitationDesign" element={<InvitationDesign/>}/>
+          <Route path="/InvitationEdit" element={<InvitationEdit invitationList={invitationList}
+                setInvitationList={setInvitationList}/>}/>
           <Route path="/Review" element={<Review />} />
           <Route path="/FAQ" element={<FAQ />} />
           <Route path="/ticket" element={<Ticket />} />

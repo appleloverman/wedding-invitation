@@ -41,3 +41,11 @@ npm start
 - Letter.js , Frame.js , Ticket.js 추가
 - FloatingBanner.js 추가 (우측 하단 배너)
 ```
+
+```
+■ 8월 31일 00시 민석
+- InvitationModify.js 추가 
+-> 기존에 있던 InvitationDesign.js의 코드를 InvitationModify.js에 복사 
+-> InvitationDesign.js 코드 변경(누르면 청첩장 샘플 볼 수 있는 이미지 4개 + 청첩장 제작하기 버튼 누르면 편집하는 페이지로 이동)
+- App.js 수정(Route 태그 추가)
+```
