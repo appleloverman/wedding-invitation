@@ -44,8 +44,17 @@ npm start
 
 ```
 ■ 8월 31일 00시 민석
-- InvitationModify.js 추가 
--> 기존에 있던 InvitationDesign.js의 코드를 InvitationModify.js에 복사 
+- InvitationModify.js 추가
+-> 기존에 있던 InvitationDesign.js의 코드를 InvitationModify.js에 복사
 -> InvitationDesign.js 코드 변경(누르면 청첩장 샘플 볼 수 있는 이미지 4개 + 청첩장 제작하기 버튼 누르면 편집하는 페이지로 이동)
 - App.js 수정(Route 태그 추가)
+```
+
+```
+■ 8월 31일 21시55분 종민
+- Letter 이미지 및 코드 추가 (+ css 파일추가)
+- Frame 이미지 및 코드 추가 (+ css 파일추가)
+- invitationDesign.js ( 이미지 가운데정렬 및 css 부분수정) 민석이허락 완료
+- Footer.js 세얼간이로고 및 부분개선
+- CustomerFAQ 하단 이미지 생성 ( 기능 미구현 )
 ```
