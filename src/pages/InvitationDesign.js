@@ -8,7 +8,7 @@ const cards = [
     url: "https://w.theirmood.com/card/XiWvmigDIO",
     title: "Wook & Juhyun",
     subtitle: "2025.10.01 SAT 2:00PM • Seoul Grand Hall",
-    theme: "classic",
+    theme: "classic"
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const cards = [
     title: "Dohyun & Hyojin",
     subtitle:
       "A successful marriage requires falling in love many times, always with the same person.",
-    theme: "blush",
+    theme: "blush"
   },
   {
     id: 3,
@@ -25,7 +25,7 @@ const cards = [
     url: "https://w.theirmood.com/card/dXHF8IHgPT",
     title: "Dasol & Yewon",
     subtitle: "2026.10.10 SAT • With Our Dearest",
-    theme: "sage",
+    theme: "sage"
   },
   {
     id: 4,
@@ -33,8 +33,8 @@ const cards = [
     url: "https://w.theirmood.com/card/IhMIUxYKKt",
     title: "With Love",
     subtitle: "Beautiful Moments Together",
-    theme: "navy",
-  },
+    theme: "navy"
+  }
 ];
 
 // theirmood 감성: 뉴트럴 팔레트 + 아주 얇은 라인 + 미세한 그림자
@@ -43,26 +43,26 @@ const THEME = {
     accent: "text-stone-900",
     sub: "text-stone-500",
     ring: "ring-stone-200",
-    chip: "bg-stone-100 text-stone-600",
+    chip: "bg-stone-100 text-stone-600"
   },
   blush: {
     accent: "text-rose-900",
     sub: "text-rose-500",
     ring: "ring-rose-100",
-    chip: "bg-rose-50 text-rose-600",
+    chip: "bg-rose-50 text-rose-600"
   },
   sage: {
     accent: "text-emerald-900",
     sub: "text-emerald-600",
     ring: "ring-emerald-100",
-    chip: "bg-emerald-50 text-emerald-600",
+    chip: "bg-emerald-50 text-emerald-600"
   },
   navy: {
     accent: "text-slate-900",
     sub: "text-slate-600",
     ring: "ring-slate-200",
-    chip: "bg-slate-50 text-slate-600",
-  },
+    chip: "bg-slate-50 text-slate-600"
+  }
 };
 
 function InviteCard({ card }) {
@@ -71,9 +71,16 @@ function InviteCard({ card }) {
   return (
     <div className="group relative w-[320px] sm:w-[360px]">
       {/* 카드 외곽 – 얇은 헤어라인 + 아주 부드러운 그림자 */}
-      <div className={`rounded-[28px] bg-white ring-1 ${t.ring} shadow-[0_6px_24px_rgba(0,0,0,0.06)] overflow-hidden transition-transform duration-300 group-hover:-translate-y-0.5`}>
+      <div
+        className={`rounded-[28px] bg-white ring-1 ${t.ring} shadow-[0_6px_24px_rgba(0,0,0,0.06)] overflow-hidden transition-transform duration-300 group-hover:-translate-y-0.5`}
+      >
         {/* 상단: 풀블리드 이미지 (자르지 않고 contain) */}
-        <a href={card.url} target="_blank" rel="noopener noreferrer" className="block">
+        <a
+          href={card.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block"
+        >
           <div className="relative">
             <div className="aspect-[3/4] w-full bg-white flex items-center justify-center overflow-hidden">
               <img
@@ -86,7 +93,9 @@ function InviteCard({ card }) {
 
             {/* 좌상단 얇은 칩 (theirMood 느낌의 라벨) */}
             <div className="absolute left-4 top-4">
-              <span className={`rounded-full px-2.5 py-1 text-[10px] tracking-wide ${t.chip} ring-1 ring-black/5`}>
+              <span
+                className={`rounded-full px-2.5 py-1 text-[10px] tracking-wide ${t.chip} ring-1 ring-black/5`}
+              >
                 INVITATION
               </span>
             </div>
@@ -95,7 +104,9 @@ function InviteCard({ card }) {
 
         {/* 컨텐츠 – 넓은 여백, 세리프 타이틀, 가는 보조텍스트 */}
         <div className="px-6 pb-6 pt-5">
-          <h3 className={`text-xl font-semibold tracking-tight ${t.accent} font-serif`}>
+          <h3
+            className={`text-xl font-semibold tracking-tight ${t.accent} font-serif`}
+          >
             {card.title}
           </h3>
 
@@ -123,11 +134,7 @@ function InviteCard({ card }) {
               aria-label="링크 복사"
               type="button"
             >
-              <svg
-                viewBox="0 0 24 24"
-                className="h-5 w-5"
-                aria-hidden="true"
-              >
+              <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
                 <path
                   d="M3 8a5 5 0 0 1 5-5h3v2H8a3 3 0 0 0 0 6h3v2H8a5 5 0 0 1-5-5Zm8-3h5a5 5 0 0 1 0 10h-5v-2h5a3 3 0 0 0 0-6h-5V5Zm-3 6h8v2H8v-2Z"
                   fill="currentColor"
@@ -151,15 +158,14 @@ export default function InvitationCards() {
         청첩장 카드
       </h2>
       <p className="mt-2 text-center text-sm text-stone-500">
-        미니멀한 여백과 풀블리드 이미지, 섬세한 라인으로 theirmood 감성을 담았어요.
+        미니멀한 여백과 풀블리드 이미지, 섬세한 라인으로 theirmood 감성을
+        담았어요.
       </p>
 
-      {/* 가로 스크롤 리스트 */}
-      <div className="mt-10 flex flex-nowrap items-start gap-8 overflow-x-auto px-6
-                      [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
-                      snap-x snap-mandatory">
+      {/* 가운데 정렬된 카드 그리드 */}
+      <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-6 justify-items-center">
         {cards.map((card) => (
-          <div key={card.id} className="shrink-0 snap-start">
+          <div key={card.id}>
             <InviteCard card={card} />
           </div>
         ))}
@@ -167,31 +173,31 @@ export default function InvitationCards() {
 
       {/* ✅ 하단 CTA 버튼 */}
       <div className="mt-12 flex justify-center px-6">
-        <Link to="/InvitationEdit"> 
-        <a
-          // 라우트 경로만 원하시는 걸로 바꿔주세요 (예: /maker, /editor 등)
-          className="group relative inline-flex items-center gap-2 rounded-2xl border border-black/10 
+        <Link to="/InvitationEdit">
+          <a
+            // 라우트 경로만 원하시는 걸로 바꿔주세요 (예: /maker, /editor 등)
+            className="group relative inline-flex items-center gap-2 rounded-2xl border border-black/10 
                      bg-white/80 px-6 py-3 text-sm font-medium text-stone-800 
                      shadow-[0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur
                      transition hover:-translate-y-0.5 hover:shadow-[0_16px_40px_rgba(0,0,0,0.12)]
                      focus:outline-none focus:ring-2 focus:ring-stone-300"
-        >
-          {/* 은은한 유광 하이라이트 */}
-          <span
-            className="pointer-events-none absolute inset-0 rounded-2xl
+          >
+            {/* 은은한 유광 하이라이트 */}
+            <span
+              className="pointer-events-none absolute inset-0 rounded-2xl
                        bg-gradient-to-r from-white/0 via-white/45 to-white/0
                        opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-            aria-hidden="true"
-          />
-          {/* 아이콘 */}
-          <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
-            <path
-              d="M12 3a1 1 0 0 1 1 1v7h7a1 1 0 1 1 0 2h-7v7a1 1 0 1 1-2 0v-7H4a1 1 0 1 1 0-2h7V4a1 1 0 0 1 1-1Z"
-              fill="currentColor"
+              aria-hidden="true"
             />
-          </svg>
-          청첩장 제작하기
-        </a>
+            {/* 아이콘 */}
+            <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
+              <path
+                d="M12 3a1 1 0 0 1 1 1v7h7a1 1 0 1 1 0 2h-7v7a1 1 0 1 1-2 0v-7H4a1 1 0 1 1 0-2h7V4a1 1 0 0 1 1-1Z"
+                fill="currentColor"
+              />
+            </svg>
+            청첩장 제작하기
+          </a>
         </Link>
       </div>
     </div>

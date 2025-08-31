@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import FloatingBanner from "../components/FloatingBanner";
 
 function Home() {
-  const HEADER_HEIGHT = 60;
   const handleButtonClick = () => {
     alert("영상 애니메이션 버튼이 클릭되었습니다!");
   };

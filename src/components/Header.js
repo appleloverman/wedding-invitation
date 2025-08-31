@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const HEADER_HEIGHT = 60;
-
 function Header() {
   return (
     <header

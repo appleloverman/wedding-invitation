@@ -264,6 +264,51 @@ const CustomerFAQ = () => {
           )}
         </div>
       </div>
+      <div className="contact-cards">
+        <div className="contact-card">
+          <img
+            src="https://img.hankyung.com/photo/202004/d744af8c6b5cbe6d52746566f5ccb4ed.jpg"
+            alt="카카오톡 문의"
+          />
+          <h3>
+            <strong>카카오톡 문의</strong>
+          </h3>
+          <p>
+            담당자와 1:1 채팅으로 <br />
+            친절하게 상담 해드립니다
+          </p>
+          <span> 클릭 </span>
+        </div>
+
+        <div className="contact-card">
+          <img
+            src="https://diverse-webstatic-files.s3.ap-northeast-2.amazonaws.com/cdn/itscard_upgrade/asset/image/main_notice_04_1.svg"
+            alt="전화 문의"
+          />
+          <h3>
+            <strong>전화 문의</strong>
+          </h3>
+          <p>
+            1544-2637
+            <br />
+            정확! 신속! 친절하게
+          </p>
+          <p>상담해드립니다.</p>
+          <span> 클릭 </span>
+        </div>
+
+        <div className="contact-card">
+          <img
+            src="https://diverse-webstatic-files.s3.ap-northeast-2.amazonaws.com/cdn/itscard_upgrade/asset/image/main_notice_03_1.svg"
+            alt="제휴 문의"
+          />
+          <h3>
+            <strong>제휴 문의</strong>
+          </h3>
+          <p>새롭고 다양한 제휴 기회들을 기다리고 있습니다.</p>
+          <span> 클릭 </span>
+        </div>
+      </div>
     </>
   );
 };
