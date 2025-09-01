@@ -55,7 +55,7 @@ function Home() {
             <div className="text-sm">10분만에 자유롭게 완성하는</div>
             <div className="text-sm">가장 섬세하고 특별한 웨딩 초대</div>
             <a
-              href="/"
+              href="http://localhost:3000/InvitationEdit"
               className="inline-flex items-center justify-center gap-2 text-tog-444 rounded-full px-6 py-3 bg-tog-pink shadow-lg hover:brightness-110"
             >
               <span>청첩장 꾸미기 시작</span>

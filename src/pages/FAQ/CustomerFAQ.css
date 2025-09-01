@@ -180,21 +180,21 @@
 .floating-image-left,
 .floating-image-right {
   position: fixed;
-  top: 120px; /* 원하는 세로 위치 조절 가능 */
-  width: 300px;
-  max-width: 20vw;
+  top: 10vh; /* 화면 높이 기준 10% 위치에 표시 */
+  width: 20vw;
+  max-width: 300px;
   border-radius: 15px;
   z-index: 1000;
   user-select: none;
-  pointer-events: none; /* 이미지 위 클릭 무시 */
+  pointer-events: none;
 }
 
 .floating-image-left {
-  left: 150px; /* 왼쪽 여백 */
+  left: 5vw;
 }
 
 .floating-image-right {
-  right: 150px; /* 오른쪽 여백 */
+  right: 5vw;
 }
 
 @media (max-width: 1500px) {

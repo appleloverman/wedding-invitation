@@ -8,7 +8,7 @@ const cards = [
     url: "https://w.theirmood.com/card/XiWvmigDIO",
     title: "Wook & Juhyun",
     subtitle: "2025.10.01 SAT 2:00PM • Seoul Grand Hall",
-    theme: "classic"
+    theme: "classic",
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const cards = [
     title: "Dohyun & Hyojin",
     subtitle:
       "A successful marriage requires falling in love many times, always with the same person.",
-    theme: "blush"
+    theme: "blush",
   },
   {
     id: 3,
@@ -25,7 +25,7 @@ const cards = [
     url: "https://w.theirmood.com/card/dXHF8IHgPT",
     title: "Dasol & Yewon",
     subtitle: "2026.10.10 SAT • With Our Dearest",
-    theme: "sage"
+    theme: "sage",
   },
   {
     id: 4,
@@ -33,8 +33,8 @@ const cards = [
     url: "https://w.theirmood.com/card/IhMIUxYKKt",
     title: "With Love",
     subtitle: "Beautiful Moments Together",
-    theme: "navy"
-  }
+    theme: "navy",
+  },
 ];
 
 // theirmood 감성: 뉴트럴 팔레트 + 아주 얇은 라인 + 미세한 그림자
@@ -43,26 +43,26 @@ const THEME = {
     accent: "text-stone-900",
     sub: "text-stone-500",
     ring: "ring-stone-200",
-    chip: "bg-stone-100 text-stone-600"
+    chip: "bg-stone-100 text-stone-600",
   },
   blush: {
     accent: "text-rose-900",
     sub: "text-rose-500",
     ring: "ring-rose-100",
-    chip: "bg-rose-50 text-rose-600"
+    chip: "bg-rose-50 text-rose-600",
   },
   sage: {
     accent: "text-emerald-900",
     sub: "text-emerald-600",
     ring: "ring-emerald-100",
-    chip: "bg-emerald-50 text-emerald-600"
+    chip: "bg-emerald-50 text-emerald-600",
   },
   navy: {
     accent: "text-slate-900",
     sub: "text-slate-600",
     ring: "ring-slate-200",
-    chip: "bg-slate-50 text-slate-600"
-  }
+    chip: "bg-slate-50 text-slate-600",
+  },
 };
 
 function InviteCard({ card }) {
