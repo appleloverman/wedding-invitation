@@ -7,6 +7,21 @@ function Home() {
     alert("영상 애니메이션 버튼이 클릭되었습니다!");
   };
 
+  const SLIDE_IMG_WIDTH = 243;
+  const SLIDE_IMG_HEIGHT = 324;
+  const SLIDE_IMG_GAP = 16;
+
+  const slideImages = [
+    "https://d38fyys32noduv.cloudfront.net/commons/card_sample/XiWvmigDIO.png",
+    "https://d38fyys32noduv.cloudfront.net/commons/card_sample/BgIftGNgps.png",
+    "https://d38fyys32noduv.cloudfront.net/commons/card_sample/dXHF8IHgPT.png",
+    "https://d38fyys32noduv.cloudfront.net/commons/card_sample/IhMIUxYKKt.png",
+    // 원하는 이미지를 추가하세요
+  ];
+
+  // 끊김 없는 순환을 위해 3배 반복
+  const repeatedImages = [...slideImages, ...slideImages, ...slideImages];
+
   return (
     <div>
       {/* ===== Hero Section (영상 + 텍스트) ===== */}
@@ -27,7 +42,6 @@ function Home() {
             type="video/mp4"
           />
         </video>
-
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
           <div
             className="bg-black bg-opacity-50 p-6 rounded-lg max-w-xl"
@@ -37,7 +51,6 @@ function Home() {
             <p className="text-lg mb-1">2025년 9월 8일 (월) 오후 2시</p>
             <p className="text-lg">505호 노코드 3기</p>
           </div>
-
           <div className="mt-10 space-y-4">
             <div className="text-sm">10분만에 자유롭게 완성하는</div>
             <div className="text-sm">가장 섬세하고 특별한 웨딩 초대</div>
@@ -45,7 +58,6 @@ function Home() {
               href="/"
               className="inline-flex items-center justify-center gap-2 text-tog-444 rounded-full px-6 py-3 bg-tog-pink shadow-lg hover:brightness-110"
             >
-              <div className="w-5 h-5"></div>
               <span>청첩장 꾸미기 시작</span>
             </a>
           </div>
@@ -100,7 +112,7 @@ function Home() {
         </div>
       </section>
 
-      {/* ===== 영상 + 텍스트 Section 1 (영상 우측) ===== */}
+      {/* ===== 영상 + 텍스트 Section 1 ===== */}
       <section
         style={{
           display: "flex",
@@ -112,7 +124,6 @@ function Home() {
           flexWrap: "wrap",
         }}
       >
-        {/* 텍스트 좌측 */}
         <div style={{ maxWidth: "400px", flex: "1 1 300px" }}>
           <h3
             style={{
@@ -141,8 +152,6 @@ function Home() {
             영상 보기
           </button>
         </div>
-
-        {/* 영상 우측 */}
         <video
           autoPlay
           muted
@@ -168,7 +177,7 @@ function Home() {
         </video>
       </section>
 
-      {/* ===== 영상 + 텍스트 Section 2 (영상 좌측) ===== */}
+      {/* ===== 영상 + 텍스트 Section 2 ===== */}
       <section
         style={{
           display: "flex",
@@ -180,7 +189,6 @@ function Home() {
           flexWrap: "wrap-reverse",
         }}
       >
-        {/* 영상 좌측 */}
         <video
           autoPlay
           muted
@@ -204,8 +212,6 @@ function Home() {
           />
           Your browser does not support the video tag.
         </video>
-
-        {/* 텍스트 우측 */}
         <div style={{ maxWidth: "400px", flex: "1 1 300px" }}>
           <h3
             style={{
@@ -237,6 +243,67 @@ function Home() {
             <FloatingBanner />
           </div>
         </div>
+      </section>
+
+      <section
+        style={{
+          position: "relative",
+          marginTop: "120px",
+          overflow: "hidden",
+          background: "#f4f2ee",
+          width: "100vw",
+          height: `${SLIDE_IMG_HEIGHT + 24}px`,
+          borderTop: "1px solid #e0ddd6",
+          boxShadow: "0 -8px 32px rgba(200, 190, 170, 0.09)",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <div
+          style={{
+            width: "100vw",
+            overflow: "hidden",
+            position: "relative",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              gap: `${SLIDE_IMG_GAP}px`,
+              alignItems: "center",
+              height: `${SLIDE_IMG_HEIGHT}px`,
+              animation: `slideX 32s linear infinite`,
+            }}
+          >
+            {repeatedImages.map((url, i) => (
+              <img
+                key={i}
+                src={url}
+                style={{
+                  width: `${SLIDE_IMG_WIDTH}px`,
+                  height: `${SLIDE_IMG_HEIGHT}px`,
+                  objectFit: "cover",
+                  borderRadius: "18px",
+                  border: "5px solid #fff",
+                  boxShadow: "0 4px 18px rgba(160,140,120,0.14)",
+                  flex: "0 0 auto",
+                  transition: "box-shadow 0.2s",
+                }}
+                alt=""
+                draggable={false}
+              />
+            ))}
+          </div>
+        </div>
+        <style>{`
+          @keyframes slideX {
+            0% { transform: translateX(0);}
+            100% { transform: translateX(-${
+              (SLIDE_IMG_WIDTH + SLIDE_IMG_GAP) * slideImages.length
+            }px);}
+          }
+        `}</style>
       </section>
     </div>
   );
