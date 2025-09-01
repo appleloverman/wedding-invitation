@@ -24,8 +24,8 @@ function App() {
       time: "12:00",
       groomName: "홍길동",
       brideName: "김영희",
-      theme: "classic",
-    },
+      theme: "classic"
+    }
   ]);
 
   return (
