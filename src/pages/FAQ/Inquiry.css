@@ -11,21 +11,6 @@
   margin-top: 50px;
 }
 
-h2 {
-  text-align: center;
-  font-size: 24px;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-p {
-  text-align: center;
-  color: #666;
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-
-/* 폼 스타일 */
 .inquiry-form {
   display: flex;
   flex-direction: column;
@@ -46,17 +31,10 @@ textarea {
   font-size: 16px;
 }
 
-input:focus,
-textarea:focus {
-  border: 1px solid #007bff;
-  outline: none;
-}
-
 textarea {
   resize: vertical;
 }
 
-/* 문의 보내기 버튼 */
 button[type="submit"] {
   padding: 14px;
   background-color: #007bff;
@@ -73,7 +51,6 @@ button[type="submit"]:hover {
   background-color: #0056b3;
 }
 
-/* 문의 목록 스타일 */
 .inquiry-list {
   width: 100%;
   margin-top: 30px;
@@ -81,12 +58,6 @@ button[type="submit"]:hover {
   background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.inquiry-list h3 {
-  font-size: 22px;
-  color: #333;
-  margin-bottom: 15px;
 }
 
 .inquiry-item {
@@ -101,7 +72,6 @@ button[type="submit"]:hover {
 .inquiry-item h4 {
   font-size: 18px;
   color: #007bff;
-  margin-bottom: 10px;
 }
 
 .inquiry-item p {

@@ -8,7 +8,7 @@ function Footer() {
     <footer
       style={{
         width: "100%",
-        backgroundColor: "#f8f8f8",
+        backgroundColor: "#F8F8F8",
         borderTop: "1px solid #ddd",
         padding: "40px 20px",
         fontFamily: "'Noto Sans KR', sans-serif",
@@ -33,6 +33,7 @@ function Footer() {
             alignItems: "flex-start",
             gap: "16px",
             minWidth: "60%",
+            paddingBottom: "20px", // Adjusted to match the second image's layout
           }}
         >
           <img
@@ -83,10 +84,19 @@ function Footer() {
 
         {/* 오른쪽: 패밀리 사이트 + SNS */}
         <div
-          style={{ textAlign: "right", minWidth: "200px", marginTop: "80px" }}
+          style={{
+            textAlign: "right",
+            minWidth: "200px",
+            marginTop: "20px", // Adjusted the margin top
+          }}
         >
           <div
-            style={{ display: "flex", justifyContent: "flex-end", gap: "10px" }}
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              gap: "10px",
+              paddingBottom: "20px", // Added padding to match the layout
+            }}
           >
             <a
               href="http://localhost:3000/InvitationDesign"
