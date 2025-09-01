@@ -13,6 +13,7 @@ import Ticket from "./pages/Ticket/Ticket";
 import Login from "./pages/Login/Login";
 import Review from "./pages/Review/Review";
 import Inquiry from "./pages/FAQ/Inquiry";
+import InquiryPage from "./pages/FAQ/InquiryPage";
 
 const HEADER_HEIGHT = 60;
 
@@ -46,7 +47,7 @@ function App() {
           />
           <Route path="/Review" element={<Review />} />
           <Route path="/FAQ" element={<FAQ />} />
-          <Route path="/FAQquery" element={<Inquiry />} />
+          <Route path="/FAQquery" element={<InquiryPage />} />
           <Route path="/ticket" element={<Ticket />} />
           <Route path="/letter" element={<Letter />} />
           <Route path="/frame" element={<Frame />} />

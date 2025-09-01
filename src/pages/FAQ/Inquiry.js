@@ -1,57 +1,48 @@
-import React, { useState } from "react";
-import "./Inquiry.css"; // CSS 파일 임포트
+// Inquiry.jsx
+import React, { useState, useEffect } from "react";
+import "./Inquiry.css";
 
-const Inquiry = () => {
-  // 1) 글 리스트
-  const [dataList, setDataList] = useState([]);
+const Inquiry = ({ onSubmit, editData }) => {
+  const [userName, setUserName] = useState("");
+  const [userTitle, setUserTitle] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userComment, setUserComment] = useState("");
 
-  // 2) 상태 관리
-  const [userName, setUserName] = useState(""); // 작성자
-  const [userTitle, setUserTitle] = useState(""); // 문의종류
-  const [userEmail, setUserEmail] = useState(""); // 이메일
-  const [userComment, setUserComment] = useState(""); // 내용
-  const [editId, setEditId] = useState(null); // 수정 모드일 때의 id
+  // 수정 모드일 때 editData로부터 값을 세팅
+  useEffect(() => {
+    if (editData) {
+      setUserName(editData.name || "");
+      setUserTitle(editData.title || "");
+      setUserEmail(editData.email || "");
+      setUserComment(editData.comment || "");
+    } else {
+      // editData가 없을 경우 초기화 (새 글 작성)
+      setUserName("");
+      setUserTitle("");
+      setUserEmail("");
+      setUserComment("");
+    }
+  }, [editData]);
 
-  // 3) id 관리 자동 증가
-  const newId =
-    dataList.length > 0 ? Math.max(...dataList.map((list) => list.id)) + 1 : 1;
-
-  // 4) 폼 제출 핸들
   const handleSubmit = (e) => {
-    e.preventDefault(); // 기본 폼 제출 동작 방지
+    e.preventDefault();
+
     const newInquiry = {
-      id: editId || newId, // 수정 모드일 경우 editId 사용, 아니면 새 Id
+      id: editData?.id ?? null,
       name: userName,
       title: userTitle,
       email: userEmail,
-      comment: userComment,
+      comment: userComment
     };
-    if (editId) {
-      setDataList((dataList) =>
-        dataList.map((list) => (list.id === editId ? newInquiry : list))
-      );
-    } else {
-      setDataList((dataList) => [...dataList, newInquiry]);
-    }
+
+    onSubmit(newInquiry); // 부모 컴포넌트로 전달
+
+    // 입력 필드 초기화 (부모에서도 상태 초기화 처리해줄 것)
     setUserName("");
     setUserTitle("");
     setUserEmail("");
     setUserComment("");
-    setEditId(null); // 수정 모드 종료
   };
-
-  // 수정 버튼을 눌렀을 때 해당 항목을 수정하도록 처리
-  const handleEdit = (list) => {
-    //수정 버튼을 누르면 그 사람의 수정하려는 id가 타고 들어온다
-    console.log("수정버튼이 눌렸다 ", list);
-    setUserName(list.name);
-    setUserTitle(list.title);
-    setUserEmail(list.email);
-    setUserComment(list.comment);
-    setEditId(list.id); // 수정 모드로 설정 =>
-  };
-
-  // const handleDelete = (e) => {};
 
   return (
     <div className="inquiry-container">
@@ -95,38 +86,21 @@ const Inquiry = () => {
             value={userComment}
             onChange={(e) => setUserComment(e.target.value)}
             placeholder="문의 내용을 입력하세요"
-            rows="5" // 텍스트 박스의 높이를 설정 (5줄 높이)
+            rows="5"
             style={{
               width: "100%",
               padding: "12px",
               borderRadius: "5px",
               border: "1px solid #ddd",
               fontSize: "16px",
-              resize: "vertical",
-            }} // 스타일 추가
+              resize: "vertical"
+            }}
           />
         </label>
-        <button type="submit">문의 보내기</button>
+        <button type="submit">
+          {editData ? "문의 수정하기" : "문의 보내기"}
+        </button>
       </form>
-
-      {/* 문의 목록 출력 */}
-      <div className="inquiry-list">
-        <h3>문의 목록</h3>
-        {dataList.length > 0 ? (
-          dataList.map((list) => (
-            <div key={list.id} className="inquiry-item">
-              <h4>{list.title}</h4>
-              <p>{list.comment}</p>
-              <p>작성자: {list.name}</p>
-              <p>이메일: {list.email}</p>
-              <button onClick={() => handleEdit(list)}>수정</button>
-              {/* <button onClick={() => handleDelete(data.id)}>삭제</button> */}
-            </div>
-          ))
-        ) : (
-          <p className="no-inquiries">현재 제출된 문의가 없습니다.</p>
-        )}
-      </div>
     </div>
   );
 };

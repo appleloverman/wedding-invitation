@@ -56,5 +56,12 @@ npm start
 - Frame 이미지 및 코드 추가 (+ css 파일추가)
 - invitationDesign.js ( 이미지 가운데정렬 및 css 부분수정) 민석이허락 완료
 - Footer.js 세얼간이로고 및 부분개선
-- CustomerFAQ 하단 이미지 생성 ( 기능 미구현 )
+- CustomerFAQ 하단 이미지 생성
+```
+
+```
+■ 9월 02일 02시 종민
+- InquiryPage 추가 (기능 미구현)
+- Inquiry.css (기능개선 핸드폰이미지 반응형)
+- Inquiry.js ( 기능 수정 )
 ```
