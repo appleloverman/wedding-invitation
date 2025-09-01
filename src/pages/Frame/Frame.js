@@ -7,7 +7,7 @@ const products = [
     id: 1,
     title: "프리미엄 고급아크릴 인테리어 웨딩액자",
     image:
-      "https://the-goodday.com/web/product/big/20200103/754821ebb2d6737b2ecdaf4e74970f83.jpg", // ← 본인이 가진 이미지 경로로 수정
+      "https://the-goodday.com/web/product/big/20200103/754821ebb2d6737b2ecdaf4e74970f83.jpg",
     originalPrice: 50000,
     salePrice: 17000,
   },
@@ -51,7 +51,6 @@ const products = [
     originalPrice: 50000,
     salePrice: 25000,
   },
-  // 추가 상품들...
 ];
 
 function Frame() {

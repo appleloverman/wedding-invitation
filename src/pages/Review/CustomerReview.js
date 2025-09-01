@@ -1,32 +1,9 @@
 import React, { useState } from "react";
-
-function StarRating({ rating, setRating }) {
-  return (
-    <div
-      style={{
-        color: "#faaf08",
-        cursor: setRating ? "pointer" : "default",
-        fontSize: "20px",
-        margin: "3px 0",
-        display: "flex",
-        gap: "2px",
-      }}
-    >
-      {[1, 2, 3, 4, 5].map((num) => (
-        <span
-          key={num}
-          onClick={() => setRating && setRating(num)}
-          style={{ userSelect: "none" }}
-        >
-          {rating >= num ? "★" : "☆"}
-        </span>
-      ))}
-    </div>
-  );
-}
+import { StarRating } from "../../data/ReviewStarRating";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 function CustomerReview() {
-  const [reviews, setReviews] = useState([
+  const [reviews, setReviews] = useLocalStorage("customerReviews", [
     {
       id: 1,
       name: "박종민",
@@ -72,11 +49,6 @@ function CustomerReview() {
     comment: "",
     photos: [],
   });
-  const [isEdit, setIsEdit] = useState(false);
-
-  // 사진만 보기
-  const [photoOnly, setPhotoOnly] = useState(false);
-
   // form 핸들러
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -84,6 +56,41 @@ function CustomerReview() {
 
   const handleRating = (rating) => {
     setForm({ ...form, rating });
+  };
+
+  const handleEdit = (review) => {
+    setForm(review);
+    setIsEdit(true);
+  };
+
+  const [isEdit, setIsEdit] = useState(false); //true false 만 쓰겠다는거겠지
+  const handleAddReview = (e) => {
+    e.preventDefault();
+    if (!form.name || !form.comment) return;
+    setReviews([...reviews, { ...form, id: Date.now() }]);
+    setForm({
+      id: null,
+      name: "",
+      date: "",
+      rating: 5,
+      comment: "",
+      photos: [],
+    });
+    setIsEdit(false);
+  };
+
+  const handleUpdateReview = (e) => {
+    e.preventDefault();
+    setReviews(reviews.map((r) => (r.id === form.id ? form : r)));
+    setForm({
+      id: null,
+      name: "",
+      date: "",
+      rating: 5,
+      comment: "",
+      photos: [],
+    });
+    setIsEdit(false);
   };
 
   const handlePhotoChange = (e) => {
@@ -105,38 +112,10 @@ function CustomerReview() {
     });
   };
 
-  const handleAddReview = (e) => {
-    e.preventDefault();
-    if (!form.name || !form.comment) return;
-    setReviews([...reviews, { ...form, id: Date.now() }]);
-    setForm({
-      id: null,
-      name: "",
-      date: "",
-      rating: 5,
-      comment: "",
-      photos: [],
-    });
-    setIsEdit(false);
-  };
-
-  const handleEdit = (review) => {
-    setForm(review);
-    setIsEdit(true);
-  };
-
-  const handleUpdateReview = (e) => {
-    e.preventDefault();
-    setReviews(reviews.map((r) => (r.id === form.id ? form : r)));
-    setForm({
-      id: null,
-      name: "",
-      date: "",
-      rating: 5,
-      comment: "",
-      photos: [],
-    });
-    setIsEdit(false);
+  const getCurrentDate = () => {
+    const today = new Date();
+    console.log(today);
+    return today.toISOString().split("T")[0];
   };
 
   const handleDelete = (id) => {
@@ -149,6 +128,8 @@ function CustomerReview() {
       photos: prev.photos.filter((_, i) => i !== idx),
     }));
   };
+
+  const [photoOnly, setPhotoOnly] = useLocalStorage("photoOnlyFilter", false);
 
   const filteredReviews = photoOnly
     ? reviews.filter((r) => r.photos && r.photos.length > 0)
@@ -234,14 +215,16 @@ function CustomerReview() {
         />
         <input
           name="date"
+          type="date" // 캘린더 UI 제공
           value={form.date}
           onChange={handleChange}
-          placeholder="날짜(예: 2025-08-27)"
+          max={getCurrentDate()} // 현재 날짜까지만 선택 가능
           style={{
             width: "140px",
             padding: "8px",
             borderRadius: "5px",
             border: "1px solid #eee",
+            cursor: "pointer", // 클릭 가능함을 시각적으로 표시
           }}
         />
         <StarRating rating={form.rating} setRating={handleRating} />
@@ -444,7 +427,6 @@ function CustomerReview() {
               </button>
             </div>
           </div>
-          {/* 모바일작성현장 뱃지 자리 (옵션) 넣고싶다면 여기에 추가 */}
         </div>
       ))}
     </div>

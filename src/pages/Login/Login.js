@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-const Login = () => {
-  return <div>Login</div>;
-};
+function Login() {
+  return <div>로그인</div>;
+}
 
 export default Login;
