@@ -1,90 +1,66 @@
-/* ---------- 달력 컴포넌트 ---------- */
-function Calendar({ value, onChange }) {
-  // value: "YYYY-MM-DD"
-  const [viewYear, setViewYear] = useState(() => Number(value.slice(0, 4)));
-  const [viewMonth, setViewMonth] = useState(
-    () => Number(value.slice(5, 7)) - 1
-  ); // 0~11
+import { useEffect, useState } from "react";
 
-  // date가 바뀌면 달력 뷰도 맞춰 줌
+/* ============ 간단 달력 ============ */
+export function Calendar({ value, onChange }) {
+  // value: "YYYY-MM-DD"
+  const parseYMD = (v) => {
+    const [y, m, d] = (v || "").split("-").map(Number);
+    const today = new Date();
+    return {
+      y: Number.isFinite(y) ? y : today.getFullYear(),
+      m: Number.isFinite(m) ? m - 1 : today.getMonth(),
+      d: Number.isFinite(d) ? d : today.getDate(),
+    };
+  };
+
+  const { y, m } = parseYMD(value);
+  const [view, setView] = useState(() => new Date(y, m, 1));
+
+  // 외부 value가 바뀌면 해당 달로 뷰 이동
   useEffect(() => {
-    setViewYear(Number(value.slice(0, 4)));
-    setViewMonth(Number(value.slice(5, 7)) - 1);
+    const { y, m } = parseYMD(value);
+    setView(new Date(y, m, 1));
   }, [value]);
 
-  const firstDay = new Date(viewYear, viewMonth, 1);
-  const firstWeekday = firstDay.getDay(); // 0(일)~6(토)
-  const daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
-  const prevMonthDays = new Date(viewYear, viewMonth, 0).getDate();
+  const pad2 = (n) => String(n).padStart(2, "0");
+  const ymdOf = (d) =>
+    `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`;
 
-  // 6주(6*7=42칸) 그리드 만들기
-  const cells = Array.from({ length: 42 }).map((_, i) => {
-    let day, monthOffset; // -1: 이전달, 0: 이번달, +1: 다음달
-    if (i < firstWeekday) {
-      day = prevMonthDays - firstWeekday + 1 + i;
-      monthOffset = -1;
-    } else if (i >= firstWeekday + daysInMonth) {
-      day = i - (firstWeekday + daysInMonth) + 1;
-      monthOffset = 1;
-    } else {
-      day = i - firstWeekday + 1;
-      monthOffset = 0;
-    }
-    return { day, monthOffset, index: i };
+  const changeMonth = (delta) => {
+    setView(new Date(view.getFullYear(), view.getMonth() + delta, 1));
+  };
+
+  // 달력 그리드 시작일(해당 달 1일의 요일만큼 앞당긴 일요일/월요일 시작)
+  const first = new Date(view.getFullYear(), view.getMonth(), 1);
+  const start = new Date(first);
+  start.setDate(1 - first.getDay()); // 일(0) 시작 기준
+
+  // 6주(6x7=42) 셀 채우기: start부터 하루씩 증가
+  const cells = Array.from({ length: 42 }, (_, i) => {
+    const d = new Date(start);
+    d.setDate(start.getDate() + i);
+    return d;
   });
 
-  const selY = Number(value.slice(0, 4));
-  const selM = Number(value.slice(5, 7)) - 1;
-  const selD = Number(value.slice(8, 10));
-  const today = new Date();
-
-  const gotoPrevMonth = () => {
-    if (viewMonth === 0) {
-      setViewYear(viewYear - 1);
-      setViewMonth(11);
-    } else setViewMonth(viewMonth - 1);
-  };
-  const gotoNextMonth = () => {
-    if (viewMonth === 11) {
-      setViewYear(viewYear + 1);
-      setViewMonth(0);
-    } else setViewMonth(viewMonth + 1);
-  };
-
-  const ymdOf = (y, m, d) => `${y}-${pad2(m + 1)}-${pad2(d)}`;
-
-  const handleClick = (cell) => {
-    if (cell.monthOffset === 0) {
-      onChange(ymdOf(viewYear, viewMonth, cell.day));
-    } else if (cell.monthOffset === -1) {
-      const y = viewMonth === 0 ? viewYear - 1 : viewYear;
-      const m = viewMonth === 0 ? 11 : viewMonth - 1;
-      onChange(ymdOf(y, m, cell.day));
-    } else {
-      const y = viewMonth === 11 ? viewYear + 1 : viewYear;
-      const m = viewMonth === 11 ? 0 : viewMonth + 1;
-      onChange(ymdOf(y, m, cell.day));
-    }
-  };
-
   const weekdayLabels = ["일", "월", "화", "수", "목", "금", "토"];
+  const todayYMD = ymdOf(new Date());
+  const selectedYMD = value;
 
   return (
-    <div className="mt-6 rounded-2xl border border-rose-100 bg-rose-50 p-4">
-      {/* 헤더 */}
+    <div className="rounded-2xl border border-rose-100 bg-rose-50 p-4">
       <div className="mb-2 flex items-center justify-between">
         <button
-          onClick={gotoPrevMonth}
+          onClick={() => changeMonth(-1)}
           className="h-8 w-8 rounded-full hover:bg-white/70"
           aria-label="이전 달"
         >
           ‹
         </button>
         <div className="text-sm font-medium tracking-wide text-rose-700">
-          {viewYear}년 {viewMonth + 1}월
+          {view.getFullYear()}년 {view.getMonth() + 1}월
         </div>
         <button
-          onClick={gotoNextMonth}
+          onClick={() => changeMonth(1)}
           className="h-8 w-8 rounded-full hover:bg-white/70"
           aria-label="다음 달"
         >
@@ -92,7 +68,6 @@ function Calendar({ value, onChange }) {
         </button>
       </div>
 
-      {/* 요일 헤더 */}
       <div className="grid grid-cols-7 text-center text-[12px] tracking-wider text-rose-400">
         {weekdayLabels.map((w) => (
           <div key={w} className="py-1">
@@ -101,37 +76,30 @@ function Calendar({ value, onChange }) {
         ))}
       </div>
 
-      {/* 날짜 셀 */}
       <div className="grid grid-cols-7 gap-y-1 text-center">
-        {cells.map((c) => {
-          const isCurrent = c.monthOffset === 0;
-          const isSelected =
-            isCurrent &&
-            viewYear === selY &&
-            viewMonth === selM &&
-            c.day === selD;
-
-          const isToday =
-            isCurrent &&
-            today.getFullYear() === viewYear &&
-            today.getMonth() === viewMonth &&
-            today.getDate() === c.day;
+        {cells.map((d, idx) => {
+          const inViewMonth =
+            d.getFullYear() === view.getFullYear() &&
+            d.getMonth() === view.getMonth();
+          const isSelected = ymdOf(d) === selectedYMD && inViewMonth;
+          const isToday = ymdOf(d) === todayYMD && inViewMonth;
 
           const base =
             "mx-auto my-1 flex h-9 w-9 items-center justify-center rounded-full text-sm";
-          const color = isCurrent ? "text-rose-900" : "text-rose-300";
+          const color = inViewMonth ? "text-rose-900" : "text-rose-300";
           const selected = isSelected
             ? "bg-rose-300 text-white"
             : isToday
             ? "ring-2 ring-rose-300"
             : "hover:bg-white/70";
+
           return (
             <button
-              key={c.index}
-              onClick={() => handleClick(c)}
+              key={idx}
+              onClick={() => onChange(ymdOf(d))}
               className={`${base} ${color} ${selected}`}
             >
-              {c.day}
+              {d.getDate()}
             </button>
           );
         })}
