@@ -3,13 +3,20 @@ import React, { useState } from "react";
 function StarRating({ rating, setRating }) {
   return (
     <div
-      style={{ color: "#f5a623", cursor: setRating ? "pointer" : "default" }}
+      style={{
+        color: "#faaf08",
+        cursor: setRating ? "pointer" : "default",
+        fontSize: "20px",
+        margin: "3px 0",
+        display: "flex",
+        gap: "2px",
+      }}
     >
       {[1, 2, 3, 4, 5].map((num) => (
         <span
           key={num}
           onClick={() => setRating && setRating(num)}
-          style={{ fontSize: "20px" }}
+          style={{ userSelect: "none" }}
         >
           {rating >= num ? "★" : "☆"}
         </span>
@@ -23,26 +30,38 @@ function CustomerReview() {
     {
       id: 1,
       name: "박종민",
-      date: "2025-08-10",
+      date: "2025-08-27",
       rating: 5,
-      comment: "박종민님 멋지십니다",
+      comment:
+        "여기저기 많이 만들어봤는데 젤 깔끔하고 제작도 쉬워서 선택했어요 너무 이쁩니다💛",
       photos: [],
     },
     {
       id: 2,
       name: "강민석",
-      date: "2025-08-15",
-      rating: 4,
-      comment: "강민석님 이해가 상당히 빠르십니다",
+      date: "2025-08-27",
+      rating: 5,
+      comment:
+        "저렴한 가격에 완전 고퀄리티! 여기 완전 추천드려요. 만들기 엄청 쉽고 문의도 빨랐어요. 부모님이 완전 만족!",
       photos: [],
     },
     {
       id: 3,
-      name: "김찬우",
-      date: "2025-08-20",
+      name: "전재석",
+      date: "2025-08-27",
       rating: 5,
-      comment: "맞춤형 디자인 덕분에 특별한 초대장을 만들 수 있었어요.",
+      comment: "너무 이쁘네요 감사합니다!",
       photos: [],
+    },
+    {
+      id: 4,
+      name: "이재오",
+      date: "2025-08-27",
+      rating: 5,
+      comment: "강추합니다!",
+      photos: [
+        "https://plus.unsplash.com/premium_photo-1675003662150-2569448d2b3b?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      ],
     },
   ]);
   const [form, setForm] = useState({
@@ -55,6 +74,10 @@ function CustomerReview() {
   });
   const [isEdit, setIsEdit] = useState(false);
 
+  // 사진만 보기
+  const [photoOnly, setPhotoOnly] = useState(false);
+
+  // form 핸들러
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -127,23 +150,73 @@ function CustomerReview() {
     }));
   };
 
+  const filteredReviews = photoOnly
+    ? reviews.filter((r) => r.photos && r.photos.length > 0)
+    : reviews;
+
   return (
-    <div style={{ maxWidth: "700px", margin: "0 auto", padding: "14px" }}>
+    <div
+      style={{
+        maxWidth: "900px",
+        margin: "0 auto",
+        fontFamily: "'Noto Sans KR', '맑은 고딕', sans-serif",
+        background: "#fff",
+      }}
+    >
       <h2
-        style={{ textAlign: "left", fontSize: "1.3rem", marginBottom: "14px" }}
+        style={{
+          fontWeight: "bold",
+          fontSize: "1.5rem",
+          marginTop: "80px",
+          marginBottom: "10px",
+        }}
       >
-        고객 후기
+        고객후기{" "}
+        <span style={{ color: "#fa7e12", fontWeight: "bold" }}>
+          {reviews.length}
+        </span>
       </h2>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          marginBottom: "14px",
+          gap: "20px",
+        }}
+      >
+        <label
+          style={{ fontSize: "15px", color: "#2c2c2c", cursor: "pointer" }}
+        >
+          <input
+            type="checkbox"
+            checked={photoOnly}
+            onChange={() => setPhotoOnly((v) => !v)}
+            style={{ accentColor: "#fa7e12", marginRight: "5px" }}
+          />
+          포토리뷰만 보기
+        </label>
+        <div
+          style={{
+            marginLeft: "auto",
+            fontWeight: "bold",
+            fontSize: "15px",
+            display: "flex",
+            gap: "12px",
+          }}
+        ></div>
+      </div>
+      {/* 등록/수정 폼 */}
       <form
         onSubmit={isEdit ? handleUpdateReview : handleAddReview}
         style={{
-          marginBottom: "24px",
+          marginBottom: "28px",
           background: "#f9f9f9",
-          padding: "16px",
-          borderRadius: "8px",
+          padding: "15px 12px",
+          borderRadius: "10px",
           display: "flex",
           alignItems: "center",
           gap: "12px",
+          fontSize: "15px",
           flexWrap: "wrap",
         }}
       >
@@ -152,14 +225,24 @@ function CustomerReview() {
           value={form.name}
           onChange={handleChange}
           placeholder="이름"
-          style={{ width: "120px" }}
+          style={{
+            width: "120px",
+            padding: "8px",
+            borderRadius: "5px",
+            border: "1px solid #eee",
+          }}
         />
         <input
           name="date"
           value={form.date}
           onChange={handleChange}
-          placeholder="날짜(예: 2025-08-20)"
-          style={{ width: "130px" }}
+          placeholder="날짜(예: 2025-08-27)"
+          style={{
+            width: "140px",
+            padding: "8px",
+            borderRadius: "5px",
+            border: "1px solid #eee",
+          }}
         />
         <StarRating rating={form.rating} setRating={handleRating} />
         <textarea
@@ -168,25 +251,32 @@ function CustomerReview() {
           onChange={handleChange}
           placeholder="후기"
           rows={2}
-          style={{ width: "450px", resize: "none" }}
+          style={{
+            width: "340px",
+            resize: "none",
+            borderRadius: "5px",
+            border: "1px solid #eee",
+            padding: "8px",
+            fontSize: "15px",
+          }}
         />
         <input
           type="file"
           accept="image/*"
           multiple
           onChange={handlePhotoChange}
-          style={{ width: "120px" }}
+          style={{ width: "110px" }}
         />
         {form.photos && form.photos.length > 0 && (
-          <div style={{ display: "flex", gap: "6px" }}>
+          <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
             {form.photos.map((src, i) => (
               <div key={i} style={{ position: "relative" }}>
                 <img
                   src={src}
                   alt=""
                   style={{
-                    width: "48px",
-                    height: "48px",
+                    width: "44px",
+                    height: "44px",
                     objectFit: "cover",
                     borderRadius: "8px",
                     border: "1px solid #eee",
@@ -215,7 +305,20 @@ function CustomerReview() {
             ))}
           </div>
         )}
-        <button type="submit">{isEdit ? "수정" : "추가"}</button>
+        <button
+          type="submit"
+          style={{
+            background: "#fa7e12",
+            color: "#fff",
+            border: "none",
+            borderRadius: "6px",
+            padding: "7px 16px",
+            fontWeight: "bold",
+            cursor: "pointer",
+          }}
+        >
+          {isEdit ? "수정" : "추가"}
+        </button>
         {isEdit && (
           <button
             type="button"
@@ -230,65 +333,63 @@ function CustomerReview() {
               });
               setIsEdit(false);
             }}
+            style={{
+              background: "#eee",
+              color: "#333",
+              border: "none",
+              borderRadius: "6px",
+              padding: "7px 16px",
+              fontWeight: "bold",
+              cursor: "pointer",
+            }}
           >
             취소
           </button>
         )}
       </form>
-      {reviews.map((review) => (
+      {/* 리뷰목록 */}
+      {filteredReviews.map((review, idx) => (
         <div
           key={review.id}
           style={{
+            padding: "16px 0 18px 0",
+            borderBottom:
+              idx !== filteredReviews.length - 1 ? "1px solid #ededed" : "none",
             display: "flex",
-            border: "1px solid #ddd",
-            borderRadius: "8px",
-            padding: "15px",
-            marginBottom: "15px",
-            boxShadow: "0 2px 5px rgba(0,0,0,0.08)",
-            background: "#fff",
-            minHeight: "80px",
-            position: "relative",
+            alignItems: "flex-start",
+            gap: "15px",
           }}
         >
-          {/* 이름 왼쪽 한 줄 분리 */}
-          <div
-            style={{
-              width: "100px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontWeight: "bold",
-              fontSize: "16px",
-              color: "#333",
-              borderRight: "1px solid #eee",
-              marginRight: "15px",
-            }}
-          >
-            {review.name}
-          </div>
-          {/* 내용 부분 */}
-          <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-            <small style={{ color: "#777", marginBottom: "4px" }}>
-              {review.date}
-            </small>
+          <div style={{ width: "125px", paddingLeft: "8px" }}>
             <StarRating rating={review.rating} />
-            <p style={{ marginTop: "10px" }}>{review.comment}</p>
+            <div
+              style={{
+                fontSize: "15px",
+                color: "#888",
+                margin: "3px 0 0 0",
+                fontWeight: "bold",
+              }}
+            >
+              {review.name}
+            </div>
+            <div
+              style={{ fontSize: "13px", color: "#c2c2c2", marginTop: "2px" }}
+            >
+              {review.date}
+            </div>
           </div>
-          {/* 오른쪽 하단: 사진 썸네일 위, 아래 수정/삭제 버튼 */}
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-end",
-              justifyContent: "flex-end",
-              minWidth: "92px",
-              position: "relative",
-            }}
-          >
+          <div style={{ flex: 1 }}>
+            <div
+              style={{
+                fontSize: "15px",
+                color: "#232323",
+                marginBottom: review.photos.length ? "10px" : "50px",
+              }}
+            >
+              {review.comment}
+            </div>
             {review.photos && review.photos.length > 0 && (
-              <div
-                style={{ display: "flex", gap: "8px", marginBottom: "10px" }}
-              >
+              <div style={{ display: "flex", gap: "8px", marginBottom: "7px" }}>
                 {review.photos.map((src, i) => (
                   <img
                     key={i}
@@ -297,7 +398,8 @@ function CustomerReview() {
                     style={{
                       width: "64px",
                       height: "64px",
-                      borderRadius: "8px",
+                      borderRadius: "7px",
+                      border: "1px solid #ddd",
                       objectFit: "cover",
                     }}
                   />
@@ -307,30 +409,42 @@ function CustomerReview() {
             <div
               style={{
                 display: "flex",
-                gap: "6px",
+                gap: "7px",
                 fontSize: "13px",
-                marginTop: "auto",
-                alignItems: "center",
+                marginTop: "4px",
               }}
             >
               <button
                 onClick={() => handleEdit(review)}
                 style={{
-                  fontSize: "12px",
-                  padding: "3px 8px",
-                  marginRight: "2px",
+                  background: "#fff",
+                  color: "#ffa412",
+                  border: "1px solid #ffa412",
+                  borderRadius: "5px",
+                  padding: "2px 11px",
+                  cursor: "pointer",
+                  fontWeight: "bold",
                 }}
               >
                 수정
               </button>
               <button
                 onClick={() => handleDelete(review.id)}
-                style={{ fontSize: "12px", padding: "3px 8px" }}
+                style={{
+                  background: "#fff",
+                  color: "#888",
+                  border: "1px solid #eee",
+                  borderRadius: "5px",
+                  padding: "2px 11px",
+                  cursor: "pointer",
+                  fontWeight: "bold",
+                }}
               >
                 삭제
               </button>
             </div>
           </div>
+          {/* 모바일작성현장 뱃지 자리 (옵션) 넣고싶다면 여기에 추가 */}
         </div>
       ))}
     </div>
