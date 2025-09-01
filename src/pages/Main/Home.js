@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import FloatingBanner from "../components/FloatingBanner";
+import FloatingBanner from "../../Util/FloatingBanner";
 
 function Home() {
   const handleButtonClick = () => {
@@ -57,7 +57,7 @@ function Home() {
         style={{
           padding: "60px 20px",
           textAlign: "center",
-          backgroundColor: "#f9f9f9"
+          backgroundColor: "#f9f9f9",
         }}
       >
         <h2
@@ -70,7 +70,7 @@ function Home() {
             display: "flex",
             justifyContent: "center",
             gap: "40px",
-            flexWrap: "wrap"
+            flexWrap: "wrap",
           }}
         >
           <Link to="/InvitationDesign">
@@ -81,7 +81,7 @@ function Home() {
                 cursor: "pointer",
                 width: "300px",
                 borderRadius: "8px",
-                boxShadow: "0 4px 10px rgba(0,0,0,0.1)"
+                boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
               }}
             />
           </Link>
@@ -93,7 +93,7 @@ function Home() {
                 cursor: "pointer",
                 width: "300px",
                 borderRadius: "8px",
-                boxShadow: "0 4px 10px rgba(0,0,0,0.1)"
+                boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
               }}
             />
           </Link>
@@ -109,7 +109,7 @@ function Home() {
           gap: "40px",
           padding: "40px 20px",
           backgroundColor: "#fff",
-          flexWrap: "wrap"
+          flexWrap: "wrap",
         }}
       >
         {/* 텍스트 좌측 */}
@@ -118,7 +118,7 @@ function Home() {
             style={{
               fontSize: "24px",
               fontWeight: "bold",
-              marginBottom: "12px"
+              marginBottom: "12px",
             }}
           >
             오프닝 애니메이션 A
@@ -135,7 +135,7 @@ function Home() {
               color: "#fff",
               border: "none",
               cursor: "pointer",
-              fontWeight: "bold"
+              fontWeight: "bold",
             }}
           >
             영상 보기
@@ -153,7 +153,7 @@ function Home() {
           height="560"
           style={{
             borderRadius: "12px",
-            boxShadow: "0 4px 15px rgba(0,0,0,0.15)"
+            boxShadow: "0 4px 15px rgba(0,0,0,0.15)",
           }}
         >
           <source
@@ -177,7 +177,7 @@ function Home() {
           gap: "40px",
           padding: "40px 20px",
           backgroundColor: "#fff",
-          flexWrap: "wrap-reverse"
+          flexWrap: "wrap-reverse",
         }}
       >
         {/* 영상 좌측 */}
@@ -191,7 +191,7 @@ function Home() {
           height="560"
           style={{
             borderRadius: "12px",
-            boxShadow: "0 4px 15px rgba(0,0,0,0.15)"
+            boxShadow: "0 4px 15px rgba(0,0,0,0.15)",
           }}
         >
           <source
@@ -211,7 +211,7 @@ function Home() {
             style={{
               fontSize: "24px",
               fontWeight: "bold",
-              marginBottom: "12px"
+              marginBottom: "12px",
             }}
           >
             오프닝 애니메이션 B
@@ -228,7 +228,7 @@ function Home() {
               color: "#fff",
               border: "none",
               cursor: "pointer",
-              fontWeight: "bold"
+              fontWeight: "bold",
             }}
           >
             영상 보기

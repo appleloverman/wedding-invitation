@@ -1,5 +1,5 @@
 import React from "react";
-import CustomerReview from "../components/CustomerReview";
+import CustomerReview from "./CustomerReview";
 
 function Review() {
   return (

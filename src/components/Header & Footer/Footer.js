@@ -1,6 +1,7 @@
 import React from "react";
-import { FaFacebookF, FaInstagram, FaBlog } from "react-icons/fa";
-import Logo from "../art/logo.png";
+import { FaFacebookF, FaInstagram } from "react-icons/fa";
+import { DiAndroid } from "react-icons/di";
+import logo from "../../art/logo.png";
 
 function Footer() {
   return (
@@ -12,7 +13,7 @@ function Footer() {
         padding: "40px 20px",
         fontFamily: "'Noto Sans KR', sans-serif",
         fontSize: "13px",
-        color: "#666"
+        color: "#666",
       }}
     >
       <div
@@ -22,7 +23,7 @@ function Footer() {
           display: "flex",
           justifyContent: "space-between",
           flexWrap: "wrap",
-          alignItems: "flex-start"
+          alignItems: "flex-start",
         }}
       >
         {/* 왼쪽: 로고 + 회사 정보 */}
@@ -31,11 +32,11 @@ function Footer() {
             display: "flex",
             alignItems: "flex-start",
             gap: "16px",
-            minWidth: "60%"
+            minWidth: "60%",
           }}
         >
           <img
-            src={Logo}
+            src={logo}
             alt="로고"
             style={{ width: "150px", height: "150px", objectFit: "contain" }}
           />
@@ -45,7 +46,7 @@ function Footer() {
                 fontSize: "16px",
                 color: "#333",
                 display: "block",
-                marginBottom: "8px"
+                marginBottom: "8px",
               }}
             >
               신랑 & 신부의 청첩장
@@ -65,7 +66,7 @@ function Footer() {
                 style={{
                   color: "#666",
                   textDecoration: "none",
-                  marginRight: "15px"
+                  marginRight: "15px",
                 }}
               >
                 개인정보처리방침
@@ -82,34 +83,25 @@ function Footer() {
 
         {/* 오른쪽: 패밀리 사이트 + SNS */}
         <div
-          style={{ textAlign: "right", minWidth: "200px", marginTop: "20px" }}
+          style={{ textAlign: "right", minWidth: "200px", marginTop: "80px" }}
         >
-          <select
-            style={{
-              width: "180px",
-              padding: "10px",
-              fontSize: "13px",
-              border: "1px solid #ccc",
-              borderRadius: "4px",
-              marginBottom: "16px"
-            }}
-          >
-            <option>Family Site</option>
-          </select>
           <div
             style={{ display: "flex", justifyContent: "flex-end", gap: "10px" }}
           >
-            <a href="#" style={{ color: "#666" }}>
-              <FaBlog size={20} />
+            <a
+              href="http://localhost:3000/InvitationDesign"
+              style={{ color: "#666" }}
+            >
+              <DiAndroid size={40} />
             </a>
             <a href="https://www.instagram.com/" style={{ color: "#666" }}>
-              <FaInstagram size={20} />
+              <FaInstagram size={40} />
             </a>
             <a
               href="https://www.facebook.com/?locale=ko_KR"
               style={{ color: "#666" }}
             >
-              <FaFacebookF size={20} />
+              <FaFacebookF size={40} />
             </a>
           </div>
         </div>

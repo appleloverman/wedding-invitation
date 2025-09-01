@@ -1,6 +1,6 @@
 import React from "react";
 import "./Frame.css"; // 스타일은 따로 관리
-import { Petals } from "../components/Petals";
+import { Petals } from "../../Util/Petals";
 
 const products = [
   {
@@ -9,7 +9,7 @@ const products = [
     image:
       "https://the-goodday.com/web/product/big/20200103/754821ebb2d6737b2ecdaf4e74970f83.jpg", // ← 본인이 가진 이미지 경로로 수정
     originalPrice: 50000,
-    salePrice: 17000
+    salePrice: 17000,
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const products = [
     image:
       "https://the-goodday.com/web/product/big/201909/791c99dc7d53777344d4dea0defa5e33.gif",
     originalPrice: 34000,
-    salePrice: 22000
+    salePrice: 22000,
   },
   {
     id: 3,
@@ -25,7 +25,7 @@ const products = [
     image:
       "https://the-goodday.com/web/product/big/20200106/a84dfa8a5da4ed874e4fb290e45c5357.jpg",
     originalPrice: 50000,
-    salePrice: 25000
+    salePrice: 25000,
   },
   {
     id: 4,
@@ -33,7 +33,7 @@ const products = [
     image:
       "https://the-goodday.com/web/product/big/20200108/25d1d41ae51ce6232c9bbe9c80798b4f.gif",
     originalPrice: 50000,
-    salePrice: 25000
+    salePrice: 25000,
   },
   {
     id: 5,
@@ -41,7 +41,7 @@ const products = [
     image:
       "https://the-goodday.com/web/product/big/20200107/93bdd76476b5d924b30bcaaa30233cd7.jpg",
     originalPrice: 50000,
-    salePrice: 25000
+    salePrice: 25000,
   },
   {
     id: 6,
@@ -49,8 +49,8 @@ const products = [
     image:
       "https://the-goodday.com/web/product/big/20200106/a80acbdba06edbc0331af9aeeab7a0a3.jpg",
     originalPrice: 50000,
-    salePrice: 25000
-  }
+    salePrice: 25000,
+  },
   // 추가 상품들...
 ];
 

@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import Home from "./pages/Home";
-import InvitationDesign from "./pages/InvitationDesign";
-import Login from "./pages/Login";
-import Review from "./pages/Review";
-import FAQ from "./pages/FAQ";
-import Ticket from "./pages/Ticket";
-import InvitationList from "./pages/InvitationList";
-import Letter from "./pages/Letter";
-import Frame from "./pages/Frame";
-import InvitationEdit from "./pages/InvitationEdit";
-
+import Header from "./components/Header & Footer/Header";
+import Footer from "./components/Header & Footer/Footer";
+import Home from "./pages/Main/Home";
+import InvitationDesign from "./pages/Invitation/InvitationDesign";
+import InvitationEdit from "./pages/Invitation/InvitationEdit";
+import InvitationList from "./pages/Invitation/InvitationList";
+import FAQ from "./pages/FAQ/FAQ";
+import Frame from "./pages/Frame/Frame";
+import Letter from "./pages/Letter/Letter";
+import Ticket from "./pages/Ticket/Ticket";
+import Login from "./pages/Login/Login";
+import Review from "./pages/Review/Review";
 
 const HEADER_HEIGHT = 60;
 
@@ -24,8 +23,8 @@ function App() {
       time: "12:00",
       groomName: "홍길동",
       brideName: "김영희",
-      theme: "classic"
-    }
+      theme: "classic",
+    },
   ]);
 
   return (
@@ -34,9 +33,16 @@ function App() {
       <main style={{ marginTop: `${HEADER_HEIGHT}px` }}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/InvitationDesign" element={<InvitationDesign/>}/>
-          <Route path="/InvitationEdit" element={<InvitationEdit invitationList={invitationList}
-                setInvitationList={setInvitationList}/>}/>
+          <Route path="/InvitationDesign" element={<InvitationDesign />} />
+          <Route
+            path="/InvitationEdit"
+            element={
+              <InvitationEdit
+                invitationList={invitationList}
+                setInvitationList={setInvitationList}
+              />
+            }
+          />
           <Route path="/Review" element={<Review />} />
           <Route path="/FAQ" element={<FAQ />} />
           <Route path="/ticket" element={<Ticket />} />

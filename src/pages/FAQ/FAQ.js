@@ -1,5 +1,5 @@
 import React from "react";
-import CustomerFAQ from "../components/CustomerFAQ";
+import CustomerFAQ from "./CustomerFAQ";
 
 const FAQ = () => {
   return (

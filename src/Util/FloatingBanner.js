@@ -4,7 +4,7 @@ const bannerImages = [
   "https://marketplace.canva.com/EAGfoeeDufE/1/0/1143w/canva-%ED%95%91%ED%81%AC-%ED%9D%B0%EC%83%89-%EA%B7%80%EC%97%AC%EC%9A%B4-%EA%B2%B0%ED%98%BC-%EC%B4%88%EB%8C%80%EC%9E%A5-oENsHkXiA6w.jpg",
   "https://marketplace.canva.com/EAF5W5YkOq8/2/0/1143w/canva-%ED%99%94%EC%9D%B4%ED%8A%B8-%EB%B8%94%EB%9E%99-minimalist-%EA%B2%B0%ED%98%BC%EC%8B%9D-%EC%B2%AD%EC%B2%A9%EC%9E%A5-dMS92YoDwMo.jpg",
   "https://marketplace.canva.com/EAGfnjiD8As/1/0/1143w/canva-%EC%B4%88%EB%A1%9D-%EB%85%B8%EB%9E%91-%EC%9A%B0%EC%95%84%ED%95%9C-%EA%B2%B0%ED%98%BC-%EC%B4%88%EB%8C%80%EC%9E%A5-DGqTFjlKP4Q.jpg",
-  "https://marketplace.canva.com/EAF6kkVk2VA/3/0/1143w/canva-%EB%B8%8C%EB%9D%BC%EC%9A%B4-%EA%B0%90%EC%84%B1%EC%A0%81%EC%9D%B8-%EC%98%81%ED%99%94-%ED%8F%AC%EC%8A%A4%ED%84%B0-%EA%B2%B0%ED%98%BC%EC%8B%9D-%EC%B2%AD%EC%B2%A9%EC%9E%A5-YTPnv60dvZQ.jpg"
+  "https://marketplace.canva.com/EAF6kkVk2VA/3/0/1143w/canva-%EB%B8%8C%EB%9D%BC%EC%9A%B4-%EA%B0%90%EC%84%B1%EC%A0%81%EC%9D%B8-%EC%98%81%ED%99%94-%ED%8F%AC%EC%8A%A4%ED%84%B0-%EA%B2%B0%ED%98%BC%EC%8B%9D-%EC%B2%AD%EC%B2%A9%EC%9E%A5-YTPnv60dvZQ.jpg",
 ];
 
 const styles = {
@@ -18,14 +18,14 @@ const styles = {
     boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
     borderRadius: "8px",
     overflow: "hidden",
-    zIndex: 999
+    zIndex: 999,
   },
   image: {
     width: "100%",
     height: "100%",
     objectFit: "cover",
-    cursor: "pointer"
-  }
+    cursor: "pointer",
+  },
 };
 
 function FloatingBanner() {
@@ -65,7 +65,7 @@ function FloatingBanner() {
           fontSize: "12px",
           lineHeight: "1.2",
           whiteSpace: "nowrap",
-          marginBottom: "10px" // 버튼과 이미지 사이 여백 추가
+          marginBottom: "10px", // 버튼과 이미지 사이 여백 추가
         }}
       >
         디자인 보러가기

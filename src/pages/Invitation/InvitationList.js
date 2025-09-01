@@ -7,7 +7,6 @@ const InvitationList = ({ invitationList, setInvitationList }) => {
 
   return (
     <div>
-      InvitationList
       <div className="flex min-h-screen bg-gray-100">
         {Array.isArray(invitationList) &&
           invitationList.map((i) => (
