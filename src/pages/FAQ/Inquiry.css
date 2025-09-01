@@ -1,0 +1,116 @@
+/* 1:1 문의하기 폼 디자인 */
+.inquiry-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 50px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+p {
+  text-align: center;
+  color: #666;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+/* 폼 스타일 */
+.inquiry-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-size: 16px;
+  color: #555;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-size: 16px;
+}
+
+input:focus,
+textarea:focus {
+  border: 1px solid #007bff;
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* 문의 보내기 버튼 */
+button[type="submit"] {
+  padding: 14px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* 문의 목록 스타일 */
+.inquiry-list {
+  width: 100%;
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.inquiry-list h3 {
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.inquiry-item {
+  padding: 15px;
+  background-color: #fff;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.1);
+}
+
+.inquiry-item h4 {
+  font-size: 18px;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.inquiry-item p {
+  font-size: 14px;
+  color: #555;
+}
+
+.no-inquiries {
+  text-align: center;
+  font-size: 18px;
+  color: #888;
+}
