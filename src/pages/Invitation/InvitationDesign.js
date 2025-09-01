@@ -15,8 +15,7 @@ const cards = [
     img: "https://d38fyys32noduv.cloudfront.net/commons/card_sample/BgIftGNgps.png",
     url: "https://w.theirmood.com/card/BgIftGNgps",
     title: "Dohyun & Hyojin",
-    subtitle:
-      "A successful marriage requires falling in love many times, always with the same person.",
+    subtitle: "2025.12.27 SAT 2:00PM • Japan Grand Hall",
     theme: "blush",
   },
   {
