@@ -6,29 +6,20 @@ function Ticket() {
   return (
     <>
       <div className="meal-container">
-        <div></div>
         <div className="ticket-list">
           {ticketImages.map((ticket, index) => (
-            <div
-              className="ticket-card"
-              key={index}
-              style={{
-                cursor: ticket.soldOut ? "default" : "pointer",
-                opacity: ticket.soldOut ? 0.5 : 1,
-              }}
-            >
-              <img src={ticket.image} alt={`ticket-${index}`} />
+            <div className="ticket-card" key={index}>
+              {/* alt 속성을 ticket.title로 수정합니다. */}
+              <img src={ticket.image} alt={ticket.title} />
               <div className="ticket-info">
                 <h3>{ticket.title}</h3>
-                <p className="price">
-                  {ticket.price}{" "}
-                  <span className="original">{ticket.originalPrice}</span>
-                </p>
-                {ticket.soldOut ? (
-                  <span className="soldout-tag">SOLD OUT</span>
-                ) : (
+                <div className="price-container">
+                  <p className="price">
+                    {ticket.price}
+                    <span className="original">{ticket.originalPrice}</span>
+                  </p>
                   <span className="sale-tag">SALE</span>
-                )}
+                </div>
               </div>
             </div>
           ))}
