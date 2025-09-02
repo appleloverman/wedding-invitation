@@ -1,8 +1,9 @@
 import { AccordionSection } from "./AccordionSection";
+import "./FormSections.css";
 
 /** 폼 섹션 (InvitationEdit에서 그대로 꽂아 쓰면 됨) */
 export function FormSections({
-  //테마
+  // 테마
   bg,
   setBg,
 
@@ -25,23 +26,24 @@ export function FormSections({
   const presets = ["#FFFFFF", "#F7F3EE", "#FFF0F6", "#E6F7FF", "#F0FFF4"];
 
   return (
-    <div className="space-y-3">
+    <div className="form-sections">
       {/* 테마 */}
       <AccordionSection title="테마" defaultOpen>
-        <div className="grid grid-cols-1 gap-4">
-          <div className="flex items-center gap-3">
-            <label className="w-24 text-sm text-gray-600">배경 색상</label>
+        <div className="section-grid">
+          <div className="row">
+            <label className="label">배경 색상</label>
           </div>
 
-          <div className="flex items-center gap-2 flex-wrap pl-24">
+          <div className="color-swatch-list">
             {presets.map((c) => (
               <button
                 key={c}
                 type="button"
-                className="h-7 w-7 rounded-full border border-gray-200"
-                style={{ backgroundColor: c }}
-                onClick={() => setBg?.(c)}
+                className="color-swatch"
+                style={{ "--swatch-color": c }}
+                onClick={() => setBg(c)}
                 title={c}
+                aria-label={`배경색 ${c}`}
               />
             ))}
           </div>
@@ -50,43 +52,55 @@ export function FormSections({
 
       {/* 기본 정보 */}
       <AccordionSection title="기본 정보">
-        <div className="grid grid-cols-1 gap-4">
-          <div className="flex items-center gap-3">
-            <label className="w-24 text-sm text-gray-600">날짜</label>
+        <div className="section-grid">
+          <div className="row">
+            <label className="label" htmlFor="date">
+              날짜
+            </label>
             <input
+              id="date"
               type="date"
-              className="h-10 flex-1 rounded border border-gray-300 px-2"
+              className="input"
               value={date}
-              onChange={(e) => setDate?.(e.target.value)}
+              onChange={(e) => setDate(e.target.value)}
             />
           </div>
 
-          <div className="flex items-center gap-3">
-            <label className="w-24 text-sm text-gray-600">시간</label>
+          <div className="row">
+            <label className="label" htmlFor="time">
+              시간
+            </label>
             <input
+              id="time"
               type="time"
-              className="h-10 flex-1 rounded border border-gray-300 px-2"
+              className="input"
               value={time}
-              onChange={(e) => setTime?.(e.target.value)}
+              onChange={(e) => setTime(e.target.value)}
             />
           </div>
 
-          <div className="flex items-center gap-3">
-            <label className="w-24 text-sm text-gray-600">신랑</label>
+          <div className="row">
+            <label className="label" htmlFor="groom">
+              신랑
+            </label>
             <input
-              className="h-10 flex-1 rounded border border-gray-300 px-2"
+              id="groom"
+              className="input"
               value={groomName}
-              onChange={(e) => setGroomName?.(e.target.value)}
+              onChange={(e) => setGroomName(e.target.value)}
               placeholder="신랑 이름"
             />
           </div>
 
-          <div className="flex items-center gap-3">
-            <label className="w-24 text-sm text-gray-600">신부</label>
+          <div className="row">
+            <label className="label" htmlFor="bride">
+              신부
+            </label>
             <input
-              className="h-10 flex-1 rounded border border-gray-300 px-2"
+              id="bride"
+              className="input"
               value={brideName}
-              onChange={(e) => setBrideName?.(e.target.value)}
+              onChange={(e) => setBrideName(e.target.value)}
               placeholder="신부 이름"
             />
           </div>
@@ -95,20 +109,27 @@ export function FormSections({
 
       {/* 인사말 */}
       <AccordionSection title="인사말">
-        <div className="grid grid-cols-1 gap-4">
-          <div className="flex items-center gap-3">
-            <label className="w-24 text-sm text-gray-600">제목</label>
+        <div className="section-grid">
+          <div className="row">
+            <label className="label" htmlFor="title1">
+              제목
+            </label>
             <input
-              className="h-10 flex-1 rounded border border-gray-300 px-2"
+              id="title1"
+              className="input"
               value={title1}
               onChange={(e) => setTitle1(e.target.value)}
               placeholder="예: INVITATION"
             />
           </div>
-          <div className="flex items-center gap-3">
-            <label className="w-24 text-sm text-gray-600">내용</label>
+
+          <div className="row">
+            <label className="label" htmlFor="content">
+              내용
+            </label>
             <input
-              className="h-10 flex-1 rounded border border-gray-300 px-2"
+              id="content"
+              className="input"
               value={content}
               onChange={(e) => setContent(e.target.value)}
               placeholder="예: 소중한 분들을 초대합니다"

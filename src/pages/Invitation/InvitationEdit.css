@@ -1,0 +1,142 @@
+/* 레이아웃 루트 */
+.invitation-edit {
+  display: flex;
+  min-height: 100vh;
+  background: #f3f4f6; /* gray-100 */
+}
+
+/* ===== 왼쪽 미리보기 ===== */
+.preview-pane {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+/* 휴대폰 프레임 느낌 */
+.phone-canvas {
+  position: relative;
+  width: 375px;
+  height: 667px;
+  background: var(--preview-bg, #ffffff);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12), 0 1px 0 rgba(0, 0, 0, 0.04) inset;
+}
+
+/* 내부 스크롤 영역 */
+.phone-scroll {
+  height: 100%;
+  padding: 24px;
+  overflow-y: auto;
+  display: grid;
+  gap: 12px;
+}
+
+/* 공통 섹션 */
+.section {
+  display: grid;
+  gap: 4px;
+}
+.section--tight {
+  gap: 2px;
+}
+
+/* 상단/하단 메타 텍스트 */
+.meta {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: #737373; /* neutral-500 */
+  margin: 0;
+}
+.meta--upper {
+  text-transform: uppercase;
+}
+
+/* 이름 라벨 */
+.names {
+  text-align: center;
+  font-size: 18px;
+  margin: 0;
+}
+
+/* 인사말 블록 */
+.intro {
+  margin-top: 8px;
+  color: #4b5563; /* gray-600 */
+  font-size: 14px;
+  text-align: center;
+  display: grid;
+  gap: 6px;
+}
+.intro__tag {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: #9ca3af; /* neutral-400-ish */
+}
+.intro__title {
+  margin: 0;
+  letter-spacing: 0.2em;
+  font-size: 11px;
+  color: #9ca3af;
+  text-transform: uppercase;
+}
+.intro__body {
+  margin: 0;
+  white-space: pre-wrap; /* 줄바꿈 유지 */
+  line-height: 1.6;
+}
+
+/* ===== 오른쪽 폼 ===== */
+.form-pane {
+  width: 400px;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  overflow-y: auto;
+}
+.form-title {
+  margin: 0 0 16px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+/* 저장 버튼 */
+.primary-btn {
+  margin-top: 24px;
+  width: 100%;
+  border: 0;
+  border-radius: 10px;
+  background: #3b82f6; /* blue-500 */
+  color: #ffffff;
+  padding: 10px 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.06s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+.primary-btn:hover {
+  background: #2563eb; /* blue-600 */
+}
+.primary-btn:active {
+  transform: scale(0.99);
+}
+.primary-btn:focus-visible {
+  outline: 2px solid #bfdbfe; /* ring */
+  outline-offset: 2px;
+}
+
+/* 반응형 살짝 보정 */
+@media (max-width: 1024px) {
+  .invitation-edit {
+    flex-direction: column;
+  }
+  .form-pane {
+    width: 100%;
+  }
+  .preview-pane {
+    padding-bottom: 0;
+  }
+}

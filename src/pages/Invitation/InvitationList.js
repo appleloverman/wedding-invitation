@@ -1,5 +1,9 @@
 // import React, { useState } from "react";
 
+import { Link } from "react-router-dom";
+import { Calendar } from "./Calendar";
+import { FormatAll } from "./FormatAll";
+
 const InvitationList = ({ invitationList, setInvitationList }) => {
   const deleteInvitationHandler = (ino) => {
     setInvitationList(invitationList.filter((i) => i.ino !== ino));
@@ -15,27 +19,55 @@ const InvitationList = ({ invitationList, setInvitationList }) => {
               className="flex-1 flex items-center justify-center p-6"
             >
               <div className="w-[375px] h-[667px] bg-white shadow-lg rounded-xl p-6 text-center">
-                <h2 className="text-gray-500 text-sm">{i.date}</h2>
-                <p className="text-gray-500 mb-4">{i.time}</p>
-                <h1 className="text-2xl font-bold mb-2">INVITATION</h1>
-                <p className="text-gray-600 mb-6">소중한 분들을 초대합니다</p>
+                {/* 상단 날짜/요일 */}
+                <h2 className="meta meta--upper">
+                  {FormatAll(i.date, i.time).dateSlash}
+                </h2>
+                <h2 className="meta meta--upper">
+                  {FormatAll(i.date, i.time).weekdayUpperEn}
+                </h2>
 
-                <p className="text-lg mb-2">{i.groomName} 🤵</p>
-                <p className="text-lg mb-2">{i.brideName} 👰</p>
+                {/* 이름 */}
+                <p className="names">
+                  {i.groomName} 🤵 · {i.brideName} 👰
+                </p>
 
-                <div className="mt-8 text-gray-500 text-sm">
-                  <p>평생 서로 귀하게 여기며</p>
-                  <p>사랑의 결실을 이루고자 합니다</p>
+                {/* 한국어 날짜/시간 포맷 */}
+                <div className="text-center">
+                  <h2 className="meta">
+                    {FormatAll(i.date, i.time).koDateTimeFull}
+                  </h2>
                 </div>
+
+                {/* 소개/본문 */}
+                <div className="intro">
+                  <p className="intro__tag">INVITATION</p>
+                  <p className="intro__title">{i.title1}</p>
+                  <p className="intro__body">{i.content}</p>
+                </div>
+
+                {/* 버튼 */}
+                <Link to="/InvitationEdit">
+                  <button className="w-full mt-6 bg-blue-500 text-white py-2 rounded">
+                    편집하기
+                  </button>
+                </Link>
+
                 <button
                   className="w-full mt-6 bg-red-500 text-white py-2 rounded"
                   onClick={() => deleteInvitationHandler(i.ino)}
                 >
                   삭제하기
                 </button>
+                <button className="w-full mt-6 bg-green-500 text-white py-2 rounded">
+                  구매하기
+                </button>
               </div>
             </div>
           ))}
+        <Link to="/InvitationEdit">
+          <button>추가하기</button>
+        </Link>
       </div>
     </div>
   );
