@@ -21,7 +21,7 @@ export default function InvitationAdd({ invitationList, setInvitationList }) {
   const [time, setTime] = useState("12:00");
   const [groomName, setGroomName] = useState("홍길동");
   const [brideName, setBrideName] = useState("김영희");
-  const [bg, setBg] = useState("#F7F7F7");
+  const [bg, setBg] = useState("#FFFFFF");
   const [title1, setTitle1] = useState("소중한 분들을 초대합니다");
   const [content, setContent] = useState(
     `저희 두 사람의 작은 만남이
