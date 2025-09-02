@@ -127,12 +127,10 @@ export function FormSections({
             <label className="label" htmlFor="content">
               내용
             </label>
-            <input
-              id="content"
-              className="input"
+            <textarea
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              placeholder="예: 소중한 분들을 초대합니다"
+              rows={8}
             />
           </div>
         </div>

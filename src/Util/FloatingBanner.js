@@ -53,7 +53,7 @@ function FloatingBanner({ slideTop }) {
           className="banner-image"
         />
       </div>
-      <a href="/InvitationDesign" className="banner-link-button">
+      <a href="/InvitationCards" className="banner-link-button">
         디자인 보러가기
       </a>
     </div>

@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FormatAll } from "./FormatAll";
 import "../../Css/InvitationList.css";
+import logoImage from "../../art/logo.png"; // 이 경로가 맞는지 다시 확인해주세요.
 
 const InvitationList = ({ invitationList, setInvitationList }) => {
   const onDelete = (ino) => {
@@ -18,7 +19,7 @@ const InvitationList = ({ invitationList, setInvitationList }) => {
             첫 카드를 만들어보세요. 예식 정보와 커버 이미지를 넣으면 자동으로
             예쁘게 구성돼요.
           </p>
-          <Link to="/InvitationEdit" className="wl-btn wl-btn--primary">
+          <Link to="/InvitationAdd" className="wl-btn wl-btn--primary">
             새 카드 만들기
           </Link>
         </div>
@@ -41,15 +42,24 @@ const InvitationList = ({ invitationList, setInvitationList }) => {
               <div className="wl-ribbon">
                 <span>{f.dateSlash}</span>
               </div>
+              {/* i.cover가 있을 때와 없을 때 모두 로고를 커버 영역 안에 배치합니다. */}
               {i.cover ? (
                 <div className="wl-cover">
                   <img src={i.cover} alt="" loading="lazy" />
+                  <img
+                    src={logoImage}
+                    alt="THREE ORGANIC 로고"
+                    className="wl-logo-in-card"
+                  />
                 </div>
               ) : (
-                <div
-                  className="wl-cover wl-cover--pattern"
-                  aria-hidden="true"
-                />
+                <div className="wl-cover wl-cover--pattern" aria-hidden="true">
+                  <img
+                    src={logoImage}
+                    alt="THREE ORGANIC 로고"
+                    className="wl-logo-in-card"
+                  />
+                </div>
               )}
               <h1 className="wl-names">
                 <span className="wl-name">{i.groomName}</span>
@@ -91,8 +101,6 @@ const InvitationList = ({ invitationList, setInvitationList }) => {
           );
         })}
       </div>
-
-      {/* 플로팅 대신 카드 리스트 아래에 배치 */}
       <div className="wl-add-container">
         <Link
           to="/InvitationAdd"

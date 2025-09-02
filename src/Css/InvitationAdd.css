@@ -14,12 +14,26 @@
     linear-gradient(180deg, #ffffff 0%, #f7f7f7 100%);
 }
 
+/* 변경: 폼 컬럼 최소/최대 폭을 늘림 */
 @media (min-width: 1024px) {
   .ie-page {
-    grid-template-columns: 480px 1fr;
-    gap: 28px;
-    padding: 28px 28px 36px;
+    grid-template-columns: 420px minmax(520px, 760px);
+    gap: 24px;
+    padding: 24px 24px 32px;
+    justify-content: center;
   }
+}
+
+/* (선택) 폼 자체 최대폭 상한을 넉넉히 허용 */
+.ie-form {
+  max-width: 760px;
+}
+
+/* 내용 입력칸 기본 높이 업 + 드래그로 더 키울 수 있게 */
+.ie-form textarea {
+  min-height: 180px;
+  line-height: 1.6;
+  resize: vertical;
 }
 
 /* ===== 미리보기 (좌측) ===== */
@@ -29,6 +43,31 @@
   align-self: start;
   display: grid;
   place-items: center;
+}
+
+/* 레이블 다음에 입력 컨트롤이 오는 행을 자동으로 2열 그리드로 배치 */
+.ie-form div:has(> label + input),
+.ie-form div:has(> label + textarea),
+.ie-form div:has(> label + select) {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr); /* 레이블 고정폭 + 나머지 전부 */
+  align-items: start; /* textarea 상단정렬 */
+  gap: 12px;
+}
+
+/* 컨트롤은 그리드의 2열을 가득 채움 */
+.ie-form input,
+.ie-form select,
+.ie-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 내용 칸(텍스트영역) 높이 여유 */
+.ie-form textarea {
+  min-height: 220px;
+  line-height: 1.6;
+  resize: vertical; /* 드래그로 더 키울 수 있게 */
 }
 
 /* 아이폰 느낌의 프레임 */

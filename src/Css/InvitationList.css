@@ -119,15 +119,17 @@
   z-index: 2;
 }
 
-/* 커버 */
-.wl-cover {
+/* 로고가 들어갈 커버 영역 */
+.wl-cover,
+.wl-cover--pattern {
+  position: relative;
   width: 100%;
   aspect-ratio: 375 / 230;
   overflow: hidden;
-  position: relative;
+  /* WL-COVER에는 배경색이, WL-COVER--PATTERN에는 배경 패턴이 적용됩니다. */
   background: #fff;
 }
-.wl-cover img {
+.wl-cover > img:not(.wl-logo-in-card) {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -147,10 +149,23 @@
     ),
     linear-gradient(135deg, #ffeef2 0%, #eef6ff 100%);
 }
+/* 로고 자체 스타일 (커버 영역 중앙에 위치) */
+.wl-logo-in-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* 로고 크기 설정 */
+  width: 150px; /* 로고 너비. 필요에 따라 조절하세요. */
+  height: auto;
+  /* 로고가 다른 요소에 가려지지 않도록 z-index를 높게 설정합니다. */
+  z-index: 3;
+  pointer-events: none; /* 버튼 클릭 간섭 방지 – 선택사항 */
+}
 
-/* 이름(스크립트 느낌) */
+/* 이름 스타일(로고 아래에 오도록) */
 .wl-names {
-  margin: 14px 16px 0;
+  margin: 14px 16px 0; /* ✨ 상단 여백을 추가하여 로고와 겹치지 않게 합니다. */
   text-align: center;
   font-size: 26px;
   font-weight: 700;
