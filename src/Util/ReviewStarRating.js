@@ -7,7 +7,7 @@ export const StarRating = ({ rating, setRating }) => {
         fontSize: "20px",
         margin: "3px 0",
         display: "flex",
-        gap: "2px",
+        gap: "2px"
       }}
     >
       {[1, 2, 3, 4, 5].map((num) => (

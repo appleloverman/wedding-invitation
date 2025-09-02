@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { FormSections } from "./FormSections";
 import { Calendar } from "./Calendar";
-import { Countdown } from "./Countdown";
 
 /** ====== 정규식 없는 초간단 날짜/시간 유틸 ====== */
 const WD_KO = [

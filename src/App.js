@@ -13,6 +13,7 @@ import Ticket from "./pages/Ticket/Ticket";
 import Login from "./pages/Login/Login";
 import Review from "./pages/Review/Review";
 import Inquiry from "./pages/FAQ/Inquiry";
+import InquiryPage from "./pages/FAQ/InquiryPage";
 
 const HEADER_HEIGHT = 60;
 
@@ -24,8 +25,8 @@ function App() {
       time: "12:00",
       groomName: "홍길동",
       brideName: "김영희",
-      theme: "classic",
-    },
+      theme: "classic"
+    }
   ]);
 
   return (
@@ -46,7 +47,7 @@ function App() {
           />
           <Route path="/Review" element={<Review />} />
           <Route path="/FAQ" element={<FAQ />} />
-          <Route path="/FAQquery" element={<Inquiry />} />
+          <Route path="/FAQquery" element={<InquiryPage />} />
           <Route path="/ticket" element={<Ticket />} />
           <Route path="/letter" element={<Letter />} />
           <Route path="/frame" element={<Frame />} />

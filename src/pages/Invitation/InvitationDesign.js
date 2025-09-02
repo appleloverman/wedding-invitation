@@ -1,73 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Petals } from "../../Util/Petals";
-
-const cards = [
-  {
-    id: 1,
-    img: "https://d38fyys32noduv.cloudfront.net/commons/card_sample/XiWvmigDIO.png",
-    url: "https://w.theirmood.com/card/XiWvmigDIO",
-    title: "Wook & Juhyun",
-    subtitle: "2025.10.01 SAT 2:00PM • Seoul Grand Hall",
-    theme: "classic",
-  },
-  {
-    id: 2,
-    img: "https://d38fyys32noduv.cloudfront.net/commons/card_sample/BgIftGNgps.png",
-    url: "https://w.theirmood.com/card/BgIftGNgps",
-    title: "Dohyun & Hyojin",
-    subtitle: "2025.12.27 SAT 2:00PM • Japan Grand Hall",
-    theme: "blush",
-  },
-  {
-    id: 3,
-    img: "https://d38fyys32noduv.cloudfront.net/commons/card_sample/dXHF8IHgPT.png",
-    url: "https://w.theirmood.com/card/dXHF8IHgPT",
-    title: "Dasol & Yewon",
-    subtitle: "2026.10.10 SAT • With Our Dearest",
-    theme: "sage",
-  },
-  {
-    id: 4,
-    img: "https://d38fyys32noduv.cloudfront.net/commons/card_sample/IhMIUxYKKt.png",
-    url: "https://w.theirmood.com/card/IhMIUxYKKt",
-    title: "With Love",
-    subtitle: "Beautiful Moments Together",
-    theme: "navy",
-  },
-];
+import { cards, THEME } from "../../data/InvitationDesignData";
 
 // theirmood 감성: 뉴트럴 팔레트 + 아주 얇은 라인 + 미세한 그림자
-const THEME = {
-  classic: {
-    accent: "text-stone-900",
-    sub: "text-stone-500",
-    ring: "ring-stone-200",
-    chip: "bg-stone-100 text-stone-600",
-  },
-  blush: {
-    accent: "text-rose-900",
-    sub: "text-rose-500",
-    ring: "ring-rose-100",
-    chip: "bg-rose-50 text-rose-600",
-  },
-  sage: {
-    accent: "text-emerald-900",
-    sub: "text-emerald-600",
-    ring: "ring-emerald-100",
-    chip: "bg-emerald-50 text-emerald-600",
-  },
-  navy: {
-    accent: "text-slate-900",
-    sub: "text-slate-600",
-    ring: "ring-slate-200",
-    chip: "bg-slate-50 text-slate-600",
-  },
-};
 
 function InviteCard({ card }) {
   const t = THEME[card.theme] ?? THEME.classic;
-
   return (
     <div className="group relative w-[320px] sm:w-[360px]">
       {/* 카드 외곽 – 얇은 헤어라인 + 아주 부드러운 그림자 */}
@@ -90,7 +28,6 @@ function InviteCard({ card }) {
                 loading="lazy"
               />
             </div>
-
             {/* 좌상단 얇은 칩 (theirMood 느낌의 라벨) */}
             <div className="absolute left-4 top-4">
               <span
@@ -101,7 +38,6 @@ function InviteCard({ card }) {
             </div>
           </div>
         </a>
-
         {/* 컨텐츠 – 넓은 여백, 세리프 타이틀, 가는 보조텍스트 */}
         <div className="px-6 pb-6 pt-5">
           <h3
@@ -109,14 +45,11 @@ function InviteCard({ card }) {
           >
             {card.title}
           </h3>
-
           <p className={`mt-2 text-sm leading-relaxed ${t.sub}`}>
             {card.subtitle}
           </p>
-
           {/* 아주 미세한 디바이더 */}
           <div className="mt-5 h-px w-full bg-gradient-to-r from-transparent via-black/10 to-transparent opacity-30" />
-
           {/* CTA – 라인 버튼(채우기 X), theirmood의 미니멀 무드 */}
           <div className="mt-4 flex gap-2">
             <a
@@ -144,13 +77,11 @@ function InviteCard({ card }) {
           </div>
         </div>
       </div>
-
       {/* 하단 미세한 그림자 퍼짐(카드가 떠 보이는 느낌) */}
       <div className="absolute inset-x-6 -bottom-3 h-6 rounded-[20px] bg-black/5 blur-xl opacity-40 pointer-events-none" />
     </div>
   );
 }
-
 export default function InvitationCards() {
   return (
     <div className="w-full bg-gradient-to-b from-stone-50 to-white py-12">
@@ -161,7 +92,6 @@ export default function InvitationCards() {
         미니멀한 여백과 풀블리드 이미지, 섬세한 라인으로 theirmood 감성을
         담았어요.
       </p>
-
       {/* 가운데 정렬된 카드 그리드 */}
       <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-6 justify-items-center">
         {cards.map((card) => (
@@ -170,14 +100,13 @@ export default function InvitationCards() {
           </div>
         ))}
       </div>
-
-      {/* ✅ 하단 CTA 버튼 */}
+      {/* :흰색_확인_표시: 하단 CTA 버튼 */}
       <div className="mt-12 flex justify-center px-6">
         <Link to="/InvitationEdit">
           <a
             // 라우트 경로만 원하시는 걸로 바꿔주세요 (예: /maker, /editor 등)
-            className="group relative inline-flex items-center gap-2 rounded-2xl border border-black/10 
-                     bg-white/80 px-6 py-3 text-sm font-medium text-stone-800 
+            className="group relative inline-flex items-center gap-2 rounded-2xl border border-black/10
+                     bg-white/80 px-6 py-3 text-sm font-medium text-stone-800
                      shadow-[0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur
                      transition hover:-translate-y-0.5 hover:shadow-[0_16px_40px_rgba(0,0,0,0.12)]
                      focus:outline-none focus:ring-2 focus:ring-stone-300"
