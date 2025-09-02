@@ -51,7 +51,7 @@ export function FormSections({
       </AccordionSection>
 
       {/* 기본 정보 */}
-      <AccordionSection title="기본 정보">
+      <AccordionSection title="기본 정보" defaultOpen>
         <div className="section-grid">
           <div className="row">
             <label className="label" htmlFor="date">
@@ -108,7 +108,7 @@ export function FormSections({
       </AccordionSection>
 
       {/* 인사말 */}
-      <AccordionSection title="인사말">
+      <AccordionSection title="인사말" defaultOpen>
         <div className="section-grid">
           <div className="row">
             <label className="label" htmlFor="title1">

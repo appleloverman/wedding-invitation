@@ -28,7 +28,7 @@ function Header() {
       >
         {[
           { to: "/", label: "Home" },
-          { to: "/InvitationDesign", label: "모바일 청첩장 디자인" },
+          { to: "/InvitationCards", label: "모바일 청첩장 디자인" },
           { to: "/InvitationList", label: "모바일 청첩장 List" },
           { to: "/ticket", label: "식권" },
           { to: "/letter", label: "편지봉투" },

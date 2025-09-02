@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header & Footer/Header";
 import Footer from "./components/Header & Footer/Footer";
 import Home from "./pages/Main/Home";
-import InvitationDesign from "./pages/Invitation/InvitationCards";
-import InvitationEdit from "./pages/Invitation/InvitationEdit";
-import InvitationList from "./pages/Invitation/InvitationList";
+import InvitationCards from "./pages/Invitation/InvitationCards";
+import InvitationAdd from "./pages/Invitation/InvitationAdd"; //새로운 청첩장 추가 컴포넌트
+import InvitationList from "./pages/Invitation/InvitationList"; //만든 청첩장 리스트 컴포넌트
 import FAQ from "./pages/FAQ/FAQ";
 import Frame from "./pages/Frame/Frame";
 import Letter from "./pages/Letter/Letter";
@@ -13,7 +13,7 @@ import Ticket from "./pages/Ticket/Ticket";
 import Login from "./pages/Login/Login";
 import Review from "./pages/Review/Review";
 import InquiryPage from "./pages/FAQ/InquiryPage";
-import LetterDetail from "./pages/Letter/LetterDetail";
+import InvitationEdit from "./pages/Invitation/InvitationEdit"; //청첩장 편집 컴포넌트
 
 const HEADER_HEIGHT = 60;
 
@@ -21,12 +21,10 @@ function App() {
   const [invitationList, setInvitationList] = useState([
     {
       ino: 1,
-      date: "2025-08-29",
+      date: "2025-09-01",
       time: "12:00",
       groomName: "홍길동",
       brideName: "김영희",
-      date: "2025-09-01",
-      time: "12:00",
       bg: "#F7F7F7",
       title1: "소중한 분들을 초대합니다",
       content: `저희 두 사람의 작은 만남이
@@ -50,9 +48,18 @@ function App() {
       <main style={{ marginTop: `${HEADER_HEIGHT}px` }}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/InvitationDesign" element={<InvitationDesign />} />
+          <Route path="/InvitationCards" element={<InvitationCards />} />
           <Route
-            path="/InvitationEdit"
+            path="/InvitationAdd"
+            element={
+              <InvitationAdd
+                invitationList={invitationList}
+                setInvitationList={setInvitationList}
+              />
+            }
+          />
+          <Route
+            path="/InvitationEdit/:ino"
             element={
               <InvitationEdit
                 invitationList={invitationList}
@@ -60,14 +67,6 @@ function App() {
               />
             }
           />
-          <Route path="/Review" element={<Review />} />
-          <Route path="/s/:index" element={<LetterDetail />} />
-          <Route path="/FAQ" element={<FAQ />} />
-          <Route path="/FAQquery" element={<InquiryPage />} />
-          <Route path="/ticket" element={<Ticket />} />
-          <Route path="/letter" element={<Letter />} />
-          <Route path="/frame" element={<Frame />} />
-          <Route path="/login" element={<Login />} />
           <Route
             path="/InvitationList"
             element={
@@ -77,6 +76,13 @@ function App() {
               />
             }
           />
+          <Route path="/Review" element={<Review />} />
+          <Route path="/FAQ" element={<FAQ />} />
+          <Route path="/FAQquery" element={<InquiryPage />} />
+          <Route path="/ticket" element={<Ticket />} />
+          <Route path="/letter" element={<Letter />} />
+          <Route path="/frame" element={<Frame />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </main>
       <Footer />
