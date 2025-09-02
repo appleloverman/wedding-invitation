@@ -56,7 +56,6 @@ const products = [
 function Frame() {
   return (
     <>
-      <Petals />
       <div className="frame-container">
         <div></div>
         <div className="product-grid">

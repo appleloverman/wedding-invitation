@@ -6,7 +6,6 @@ import { ticketImages } from "../../data/LetterData";
 function Letter() {
   return (
     <>
-      <Petals />
       <div className="meal-container">
         <div></div>
         <div className="ticket-list">

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Petals } from "../../Util/Petals";
 
 function Header() {
   return (
@@ -12,16 +13,17 @@ function Header() {
         backgroundColor: "#fff",
         borderBottom: "1px solid #eee",
         zIndex: 9999,
-        padding: "15px 0"
+        padding: "15px 0",
       }}
     >
+      <Petals />
       <nav
         style={{
           display: "flex",
           justifyContent: "center",
           gap: "40px", // 메뉴 간격 넓게
           fontSize: "15px",
-          fontWeight: "400"
+          fontWeight: "400",
         }}
       >
         {[
@@ -33,7 +35,7 @@ function Header() {
           { to: "/frame", label: "액자" },
           { to: "/Review", label: "고객후기" },
           { to: "/FAQ", label: "자주 묻는 질문" },
-          { to: "/login", label: "로그인" }
+          { to: "/login", label: "로그인" },
         ].map((item) => (
           <Link
             key={item.to}
@@ -43,7 +45,7 @@ function Header() {
               position: "relative",
               textDecoration: "none",
               color: "#000",
-              paddingBottom: "5px"
+              paddingBottom: "5px",
             }}
           >
             {item.label}
