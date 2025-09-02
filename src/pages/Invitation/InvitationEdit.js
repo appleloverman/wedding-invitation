@@ -26,7 +26,7 @@ const InvitationEdit = ({ invitationList = [], setInvitationList }) => {
   const [time, setTime] = useState(existing?.time || "12:00");
   const [groomName, setGroomName] = useState(existing?.groomName || "홍길동");
   const [brideName, setBrideName] = useState(existing?.brideName || "김영희");
-  const [bg, setBg] = useState(existing?.bg || "#F7F7F7");
+  const [bg, setBg] = useState(existing?.bg || "#FFFFFF");
   const [title1, setTitle1] = useState(
     existing?.title1 || "소중한 분들을 초대합니다"
   );
