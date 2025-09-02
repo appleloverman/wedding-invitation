@@ -3,15 +3,20 @@ import "../../Css/Ticket.css";
 import { ticketImages } from "../../data/TicketData";
 
 function Ticket() {
-  // 이미지마다 개별 카드로 구성
-
   return (
     <>
       <div className="meal-container">
         <div></div>
         <div className="ticket-list">
           {ticketImages.map((ticket, index) => (
-            <div className="ticket-card" key={index}>
+            <div
+              className="ticket-card"
+              key={index}
+              style={{
+                cursor: ticket.soldOut ? "default" : "pointer",
+                opacity: ticket.soldOut ? 0.5 : 1,
+              }}
+            >
               <img src={ticket.image} alt={`ticket-${index}`} />
               <div className="ticket-info">
                 <h3>{ticket.title}</h3>
@@ -19,7 +24,11 @@ function Ticket() {
                   {ticket.price}{" "}
                   <span className="original">{ticket.originalPrice}</span>
                 </p>
-                <span className="sale-tag">SALE</span>
+                {ticket.soldOut ? (
+                  <span className="soldout-tag">SOLD OUT</span>
+                ) : (
+                  <span className="sale-tag">SALE</span>
+                )}
               </div>
             </div>
           ))}
