@@ -1,6 +1,5 @@
 import React from "react";
 import "../Ticket/Ticket.css";
-import { Petals } from "../../Util/Petals";
 import { ticketImages } from "../../data/LetterData";
 
 function Letter() {

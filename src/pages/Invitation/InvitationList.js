@@ -1,7 +1,6 @@
 // import React, { useState } from "react";
 
 import { Link } from "react-router-dom";
-import { Calendar } from "./Calendar";
 import { FormatAll } from "./FormatAll";
 
 const InvitationList = ({ invitationList, setInvitationList }) => {

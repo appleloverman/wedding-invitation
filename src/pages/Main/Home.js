@@ -1,4 +1,5 @@
-import React from "react";
+// Home.jsx
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import FloatingBanner from "../../Util/FloatingBanner";
 
@@ -10,6 +11,15 @@ function Home() {
   const SLIDE_IMG_WIDTH = 243;
   const SLIDE_IMG_HEIGHT = 324;
   const SLIDE_IMG_GAP = 16;
+  const slideSectionRef = useRef(null); // useRef 훅으로 슬라이드 섹션 ref 생성
+  const [slideTop, setSlideTop] = useState(0); // 슬라이드 섹션의 Y 위치 상태
+
+  useEffect(() => {
+    // 컴포넌트가 마운트되면 슬라이드 섹션의 Y 위치를 측정하여 상태에 저장
+    if (slideSectionRef.current) {
+      setSlideTop(slideSectionRef.current.offsetTop);
+    }
+  }, []); // 마운트 시 한 번만 실행
 
   const slideImages = [
     "https://d38fyys32noduv.cloudfront.net/commons/card_sample/XiWvmigDIO.png",
@@ -239,13 +249,12 @@ function Home() {
           >
             영상 보기
           </button>
-          <div>
-            <FloatingBanner />
-          </div>
         </div>
       </section>
 
+      {/* === 이미지 슬라이드 섹션 === */}
       <section
+        ref={slideSectionRef} // useRef로 생성한 ref 할당
         style={{
           position: "relative",
           marginTop: "120px",
@@ -305,6 +314,10 @@ function Home() {
           }
         `}</style>
       </section>
+
+      {/* FloatingBanner 컴포넌트를 이 위치로 이동 */}
+      {/* slideTop props 추가 */}
+      <FloatingBanner slideTop={slideTop} />
     </div>
   );
 }

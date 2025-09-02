@@ -12,7 +12,6 @@ import Letter from "./pages/Letter/Letter";
 import Ticket from "./pages/Ticket/Ticket";
 import Login from "./pages/Login/Login";
 import Review from "./pages/Review/Review";
-import Inquiry from "./pages/FAQ/Inquiry";
 import InquiryPage from "./pages/FAQ/InquiryPage";
 
 const HEADER_HEIGHT = 60;
