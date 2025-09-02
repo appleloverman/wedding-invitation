@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../../Css/CustomerFAQ.css";
 import { Petals } from "../../Util/Petals";
-import { useNavigate } from "react-router-dom"; // ✅ 추가
+import { useNavigate } from "react-router-dom";
 import { askData } from "../../data/FaqData";
 
 const CustomerFAQ = () => {
@@ -9,17 +9,46 @@ const CustomerFAQ = () => {
   const [searchMenu, setSearchMenu] = useState(null); // 메뉴 필터
   const [select, setSelect] = useState(null); // 질문 토글 상태
 
-  const navigate = useNavigate(); // ✅ React Router 이동 기능
+  const navigate = useNavigate(); // ✅ React Router navigate 이동 기능
 
   // 필터된 데이터
   const filteredData = askData.filter(
     (i) => i.comment.includes(search) && (!searchMenu || i.title === searchMenu)
   );
+  // .filter() 메서드를 사용하여 askData 배열의 각 항목(i)을 하나씩 접근
+  // 조건 1) i.comment.includes(search)
+  // askData 배열의 각 항목(i)에서 'comment'(내용) 필드에 접근하고
+  // .includes(search) 메서드를 사용하여 'comment'에 search(검색창에 입력된 값)이 포함되어 있는지 확인
+  // 그리고, 이 조건이 '참(true)'일 때만 다음 조건으로 넘어감
+  // (includes()는 특정 문자열에 특정 문자열이 포함되어 있는지 확인하는 기능)
+
+  // 조건 2) !searchMenu || i.title === searchMenu
+  // 이 조건은 '논리 OR(||)' 연산자로 연결되어 있음
+  // 첫 번째 부분(!searchMenu)은 'searchMenu' 상태가 비어있거나 'null', 'undefined'일 때 '참(true)'가 된다
+  // '참'인 경우, 두 번째 부분(i.title === searchMenu)은 무시하고 전체 조건이 '참'이 된다.
+  // (즉, 카테고리를 선택하지 않았을 때는 검색어만으로 필터링된다)
+  // 두 번째 부분은 'searchMenu' 상태에 값이 있을 때 동작
+  // 이 경우, 'i.title'(데이터의 제목)이 'searchMenu'와 정확히 일치하는지 확인.
+  // 최종적으로 두 조건(condition 1 && condition 2)을 모두 만족하는 데이터만
+  // filteredData 변수에 askData 배열을 필터링한 결과가 담음
 
   // 질문 클릭
   const handleClick = (i) => {
     setSelect(select === i.id ? null : i.id);
   };
+  // `setSelect` State함수를 사용하여 `select` 상태를 업데이트한다
+  // 이 업데이트는 클릭한 항목의 ID를 기준으로 토글(켜고 끄기)하는 역할을 한다.
+  // 삼항 연산자(ternary operator)를 사용한 조건부 업데이트 :
+  // ■ 전체코드 => (select === i.id ? null : i.id);
+  // select === i.id
+  // `select` 현재 상태와 클릭된 항목(i)의 ID가 같은지 확인합니다.
+  // 조건이 'true'일 때:
+  // 현재 선택된 항목을 다시 클릭한 경우입니다.
+  // 'null' 값을 할당하여 선택을 해제합니다.
+  // ? null
+  // 조건이 'false'일 때:
+  // 현재 선택된 항목이 없거나, 다른 항목을 클릭한 경우입니다.
+  // 클릭된 항목(i)의 ID를 새로운 'select' 값으로 할당하여 해당 항목을 선택합니다.
 
   // 메뉴 클릭
   const handleClickMenu = (title) => {

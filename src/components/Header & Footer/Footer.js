@@ -1,7 +1,8 @@
 import React from "react";
-import { FaFacebookF, FaInstagram } from "react-icons/fa";
-import { DiAndroid } from "react-icons/di";
 import logo from "../../art/logo.png";
+import youtube from "../../art/youtube.jpg";
+import instagram from "../../art/instagram.jpg";
+import facebook from "../../art/facebook.jpg";
 
 function Footer() {
   return (
@@ -13,7 +14,7 @@ function Footer() {
         padding: "40px 20px",
         fontFamily: "'Noto Sans KR', sans-serif",
         fontSize: "13px",
-        color: "#666",
+        color: "#666"
       }}
     >
       <div
@@ -23,7 +24,7 @@ function Footer() {
           display: "flex",
           justifyContent: "space-between",
           flexWrap: "wrap",
-          alignItems: "flex-start",
+          alignItems: "flex-start"
         }}
       >
         {/* 왼쪽: 로고 + 회사 정보 */}
@@ -33,7 +34,7 @@ function Footer() {
             alignItems: "flex-start",
             gap: "16px",
             minWidth: "60%",
-            paddingBottom: "20px", // Adjusted to match the second image's layout
+            paddingBottom: "20px" // Adjusted to match the second image's layout
           }}
         >
           <img
@@ -47,7 +48,7 @@ function Footer() {
                 fontSize: "16px",
                 color: "#333",
                 display: "block",
-                marginBottom: "8px",
+                marginBottom: "8px"
               }}
             >
               신랑 & 신부의 청첩장
@@ -63,16 +64,19 @@ function Footer() {
             <p>운영시간 : 평일 09:30 - 18:10 (점심 13:10 - 14:20)</p>
             <p style={{ marginTop: "8px" }}>
               <a
-                href="#"
+                href="http://localhost:3000/FAQ"
                 style={{
                   color: "#666",
                   textDecoration: "none",
-                  marginRight: "15px",
+                  marginRight: "15px"
                 }}
               >
                 개인정보처리방침
               </a>
-              <a href="#" style={{ color: "#666", textDecoration: "none" }}>
+              <a
+                href="http://localhost:3000/FAQ"
+                style={{ color: "#666", textDecoration: "none" }}
+              >
                 이용약관
               </a>
             </p>
@@ -87,7 +91,7 @@ function Footer() {
           style={{
             textAlign: "right",
             minWidth: "200px",
-            marginTop: "20px", // Adjusted the margin top
+            marginTop: "20px" // Adjusted the margin top
           }}
         >
           <div
@@ -95,23 +99,32 @@ function Footer() {
               display: "flex",
               justifyContent: "flex-end",
               gap: "10px",
-              paddingBottom: "20px", // Added padding to match the layout
+              paddingBottom: "20px"
             }}
           >
-            <a
-              href="http://localhost:3000/InvitationDesign"
-              style={{ color: "#666" }}
-            >
-              <DiAndroid size={40} />
+            <a href="www.youtube.com">
+              {/* 첫 번째 이미지 삽입 */}
+              <img
+                src={youtube}
+                alt="유튜브 앱 링크"
+                style={{ width: "50px", height: "50px" }}
+              />
             </a>
-            <a href="https://www.instagram.com/" style={{ color: "#666" }}>
-              <FaInstagram size={40} />
+            <a href="https://www.instagram.com/">
+              {/* 두 번째 이미지 삽입 */}
+              <img
+                src={instagram}
+                alt="인스타그램 링크"
+                style={{ width: "50px", height: "50px" }}
+              />
             </a>
-            <a
-              href="https://www.facebook.com/?locale=ko_KR"
-              style={{ color: "#666" }}
-            >
-              <FaFacebookF size={40} />
+            <a href="https://www.facebook.com/?locale=ko_KR">
+              {/* 세 번째 이미지 삽입 */}
+              <img
+                src={facebook}
+                alt="페이스북 링크"
+                style={{ width: "50px", height: "50px" }}
+              />
             </a>
           </div>
         </div>
