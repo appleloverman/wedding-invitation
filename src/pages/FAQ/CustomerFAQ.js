@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./CustomerFAQ.css";
+import "../../Css/CustomerFAQ.css";
 import { Petals } from "../../Util/Petals";
 import { useNavigate } from "react-router-dom"; // ✅ 추가
 import { askData } from "../../data/FaqData";

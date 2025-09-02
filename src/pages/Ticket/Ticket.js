@@ -1,5 +1,5 @@
 import React from "react";
-import "../Ticket/Ticket.css";
+import "../../Css/Ticket.css";
 import { ticketImages } from "../../data/TicketData";
 
 function Ticket() {

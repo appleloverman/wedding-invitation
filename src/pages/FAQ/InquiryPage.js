@@ -1,7 +1,7 @@
 // InquiryPage.jsx
 import React, { useState } from "react";
 import Inquiry from "./Inquiry";
-import "./Inquiry.css";
+import "../../Css/Inquiry.css";
 
 const InquiryPage = () => {
   const [dataList, setDataList] = useState([]);

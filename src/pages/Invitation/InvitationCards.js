@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { cards } from "../../data/InvitationCardsData";
-import "./InvitationCards.css";
+import "../../Css/InvitationCards.css";
 
 // theirmood 감성: 뉴트럴 팔레트 + 얇은 라인 + 미세한 그림자
 

@@ -1,5 +1,5 @@
 import React from "react";
-import "./Frame.css"; // 스타일은 따로 관리
+import "../../Css/Frame.css";
 
 const products = [
   {

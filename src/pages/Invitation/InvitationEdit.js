@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { FormSections } from "./FormSections";
 import { Calendar } from "./Calendar";
-
-import "./InvitationEdit.css";
+import "../../Css/InvitationEdit.css";
 import { FormatAll } from "./FormatAll";
 import { Link } from "react-router-dom";
 

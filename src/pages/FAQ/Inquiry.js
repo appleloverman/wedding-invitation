@@ -1,6 +1,6 @@
 // Inquiry.jsx
 import React, { useState, useEffect } from "react";
-import "./Inquiry.css";
+import "../../Css/Inquiry.css";
 
 // onMoveToList props 추가
 const Inquiry = ({ onSubmit, editData, onMoveToList }) => {
