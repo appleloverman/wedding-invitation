@@ -128,6 +128,8 @@ export function FormSections({
               내용
             </label>
             <textarea
+              id="content"
+              className="input"
               value={content}
               onChange={(e) => setContent(e.target.value)}
               rows={8}

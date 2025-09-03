@@ -43,7 +43,7 @@ export default function InvitationAdd({ invitationList, setInvitationList }) {
   const setInvitationHandler = () => {
     setInvitationList((prev) => [
       ...(prev || []),
-      { ino, date, time, groomName, brideName, bg, title1, content }
+      { ino, date, time, groomName, brideName, bg, title1, content },
     ]);
     // 목록 화면으로 이동하므로 여기서 ino 증가/리셋은 생략
   };

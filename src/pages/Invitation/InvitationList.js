@@ -1,11 +1,35 @@
 // src/components/InvitationList.jsx
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FormatAll } from "./FormatAll";
 import "../../Css/InvitationList.css";
 import logoImage from "../../art/logo.png"; // 이 경로가 맞는지 다시 확인해주세요.
+import PurchaseModal from "./PurchaseModal";
 
 const InvitationList = ({ invitationList, setInvitationList }) => {
+  const [open, setOpen] = useState(false);
+
+  const product = {
+    id: "daycard-mobile-01",
+    title: "데이카드 모바일 청첩장",
+    price: 69000,
+    salePrice: 49000,
+    shippingFee: 0,
+    image:
+      "https://d38fyys32noduv.cloudfront.net/commons/card_sample/XiWvmigDIO.png",
+  };
+
+  const designImages = {
+    classic:
+      "https://d38fyys32noduv.cloudfront.net/commons/card_sample/XiWvmigDIO.png",
+    blush:
+      "https://d38fyys32noduv.cloudfront.net/commons/card_sample/BgIftGNgps.png",
+    minimal:
+      "https://d38fyys32noduv.cloudfront.net/commons/card_sample/dXHF8IHgPT.png",
+    modern:
+      "https://d38fyys32noduv.cloudfront.net/commons/card_sample/IhMIUxYKKt.png",
+  };
+
   const onDelete = (ino) => {
     setInvitationList((list) => list.filter((i) => i.ino !== ino));
   };
@@ -90,12 +114,12 @@ const InvitationList = ({ invitationList, setInvitationList }) => {
                 >
                   삭제하기
                 </button>
-                <Link
-                  to={`/checkout/${i.ino}`}
+                <button
+                  onClick={() => setOpen(true)}
                   className="wl-btn wl-btn--accent"
                 >
                   구매하기
-                </Link>
+                </button>
               </footer>
             </article>
           );
@@ -109,6 +133,12 @@ const InvitationList = ({ invitationList, setInvitationList }) => {
           청첩장 추가하기
         </Link>
       </div>
+      <PurchaseModal
+        open={open}
+        onClose={() => setOpen(false)}
+        product={product}
+        designImages={designImages}
+      />
     </div>
   );
 };
