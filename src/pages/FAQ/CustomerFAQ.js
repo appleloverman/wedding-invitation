@@ -89,20 +89,20 @@ const CustomerFAQ = () => {
         {/* 메뉴 버튼 */}
         <div className="faq-menu-buttons">
           {["전체보기", "주문", "제품", "배송", "적립", "회원", "기타"].map(
-            (menu) => (
+            (title) => (
               <button
-                key={menu}
+                key={title}
                 className={`faq-menu-button ${
-                  searchMenu === menu ||
-                  (menu === "전체보기" && searchMenu === null)
+                  searchMenu === title ||
+                  (title === "전체보기" && searchMenu === null)
                     ? "active"
                     : ""
                 }`}
                 onClick={() =>
-                  handleClickMenu(menu === "전체보기" ? null : menu)
+                  handleClickMenu(title === "전체보기" ? null : title)
                 }
               >
-                {menu}
+                {title}
               </button>
             )
           )}

@@ -254,16 +254,27 @@
   color: #6b7280;
 }
 
-/* ===== 폼 액션 (하단 고정) ===== */
+/* ===== 폼 액션 (하단 고정) - 정렬/순서 보강 ===== */
 .sticky-actions {
-  position: sticky;
-  bottom: 0;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr; /* 좌우 반반 */
   gap: 10px;
-  padding-top: 14px;
-  margin-top: 18px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 24%);
+  align-items: stretch;
+}
+
+/* 버튼이 셀을 가득 채우도록 */
+.sticky-actions a.btn,
+.sticky-actions button.btn,
+.sticky-actions > .btn {
+  width: 100%;
+}
+
+/* 순서 강제: 파란 버튼(Primary) 왼쪽, 하얀 버튼(Ghost) 오른쪽 */
+.sticky-actions .btn-primary {
+  grid-column: 1;
+}
+.sticky-actions .btn-ghost {
+  grid-column: 2;
 }
 
 /* ===== 버튼 공통 ===== */
