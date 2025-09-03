@@ -1,11 +1,34 @@
 // src/pages/Invitation/CartList.jsx
 import React from "react";
 import { useCart } from "../Invitation/CartProvider";
+import { useNavigate } from "react-router-dom";
 
 const currency = (n) => (n ?? 0).toLocaleString("ko-KR");
 
 export default function CartList() {
   const { items, totals, removeItem, clear } = useCart();
+  const navigate = useNavigate();
+
+  const handleOrder = () => {
+    // 간단한 주문번호 생성
+    const orderId = "OD-" + Date.now().toString(36).toUpperCase();
+
+    // 완료 페이지에서 보여줄 최근 주문 정보 저장(안전용)
+    const lastOrder = {
+      orderId,
+      count: totals.count,
+      amount: totals.amount,
+      items,
+      ts: new Date().toISOString(),
+    };
+    try {
+      localStorage.setItem("last_order", JSON.stringify(lastOrder));
+    } catch {}
+
+    // 장바구니 비우고 완료 페이지로 이동
+    clear();
+    navigate("/order-complete", { state: { orderId } });
+  };
 
   return (
     <section className="max-w-4xl mx-auto px-6 py-10">
@@ -28,9 +51,17 @@ export default function CartList() {
                 />
                 <div className="flex-1">
                   <div className="font-medium">{it.title}</div>
-                  <div className="text-sm text-gray-500">
-                    디자인: {it.options.design} / 봉투: {it.options.envelope}
-                  </div>
+
+                  {/* 옵션이 있을 때만 보여주기 */}
+                  {(it?.options?.design || it?.options?.envelope) && (
+                    <div className="text-sm text-gray-500">
+                      {it?.options?.design && <>디자인: {it.options.design} </>}
+                      {it?.options?.envelope && (
+                        <>/ 봉투: {it.options.envelope}</>
+                      )}
+                    </div>
+                  )}
+
                   <div className="text-sm text-gray-500">수량: {it.qty}</div>
                 </div>
                 <div className="text-right">
@@ -60,7 +91,10 @@ export default function CartList() {
             >
               비우기
             </button>
-            <button className="flex-1 rounded-xl bg-gray-900 text-white px-4 py-3 font-semibold">
+            <button
+              onClick={handleOrder}
+              className="flex-1 rounded-xl bg-gray-900 text-white px-4 py-3 font-semibold hover:-translate-y-0.5 hover:shadow"
+            >
               주문하기
             </button>
           </div>

@@ -17,7 +17,7 @@ export const ticketImages = [
   },
   {
     title: "165×115mm 트레싱지봉투 TF_002",
-    price: "250/장당",
+    price: "250원/장당",
     originalPrice: "500원",
     image:
       "https://cardmarket-kr.s3.ap-northeast-2.amazonaws.com/additional-product-images/square/20240829-154221-vkcur.jpeg",

@@ -159,3 +159,45 @@
 .ticket-card .cta-row {
   margin-top: 10px;
 }
+/* === Ticket: 여백 더 촘촘하게 (오버라이드) === */
+
+/* 카드 내부 패딩 더 줄이기 */
+.ticket-card .ticket-info {
+  padding: 10px 12px 12px;
+}
+
+/* 제목 ↓ 여백/높이 최소화 (2줄 말줄임 유지) */
+.ticket-card .ticket-info .ticket-title {
+  margin: 4px 0 2px;
+  line-height: 1.25;
+  min-height: 0 !important; /* 기존 2.8em 제거 */
+  height: auto !important;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* 가격 블록 ↑ 여백/간격 축소 */
+.ticket-card .price-container.compact {
+  margin-top: 4px; /* 기존 6px → 4px */
+  gap: 4px; /* 기존 6px → 4px */
+}
+
+/* 수량 라인 ↑ 여백 축소 + 선택창 컴팩트 */
+.ticket-card .qty-row {
+  margin-top: 4px;
+} /* 기존 6px → 4px */
+.ticket-card .qty-row select {
+  width: 76px;
+  height: 32px;
+  padding: 0 8px;
+  font-size: 13px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  line-height: 1.25;
+}
+
+/* 버튼 위 여백 축소 */
+.ticket-card .cta-row {
+  margin-top: 8px;
+} /* 기존 10px → 8px */

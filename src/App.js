@@ -17,6 +17,7 @@ import Login from "./pages/Login/Login";
 import Review from "./pages/Review/Review";
 import CartList from "./pages/Cart/CartList";
 import { CartProvider } from "./pages/Invitation/CartProvider";
+import OrderComplete from "./pages/Cart/OrderComplete";
 
 const HEADER_HEIGHT = 60;
 
@@ -86,6 +87,7 @@ function App() {
 
             {/* ✅ 장바구니 페이지: 경로 소문자 /cartList 로 통일 */}
             <Route path="/cartList" element={<CartList />} />
+            <Route path="/order-complete" element={<OrderComplete />} />
 
             <Route path="/Review" element={<Review />} />
             <Route path="/FAQ" element={<FAQ />} />
