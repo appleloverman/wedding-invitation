@@ -13,10 +13,8 @@ const MIN_QTY = 100;
 const MAX_QTY = 500;
 
 /** 🔒 단일구매(1개 제한) 규칙 */
-// 1) 제목에 '포스터' 포함
 const SINGLE_ONLY_KEYWORDS = [/포스터/i];
-// 2) 제목이 정확히 아래 목록 중 하나
-const SINGLE_ONLY_TITLES = ["츄 & 조유리"]; // ← 여기 추가해서 해결!
+const SINGLE_ONLY_TITLES = ["츄 & 조유리"];
 // 3) 데이터에 ticket.singleOnly === true 면 무조건 단일구매
 
 const isSingleOnly = (ticket) => {
@@ -63,7 +61,7 @@ export default function Ticket() {
           unitPrice: unit,
           qty: 1, // 🔒 항상 1개
           options: { singleOnly: true },
-          image: ticket.image,
+          image: ticket.image
         });
       }
       navigate("/cartList");
@@ -79,7 +77,7 @@ export default function Ticket() {
       unitPrice: unit,
       qty,
       options: {},
-      image: ticket.image,
+      image: ticket.image
     });
 
     navigate("/cartList");

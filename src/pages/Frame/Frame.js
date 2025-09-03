@@ -14,7 +14,7 @@ export default function Frame() {
 
   const getKeyBase = (item) =>
     item.id ||
-    (item.title ? item.title.replace(/\s+/g, "-").toLowerCase() : "frame");
+    (item.title ? item.title.replace(/\s+/g, "-").toLowerCase() : "frame"); // 정규표현식?
 
   const getQty = (key) => qtyMap[key] ?? 1;
 
@@ -36,7 +36,7 @@ export default function Frame() {
       unitPrice: unit,
       qty,
       options: {},
-      image: item.image,
+      image: item.image
     });
 
     navigate("/cartList");
