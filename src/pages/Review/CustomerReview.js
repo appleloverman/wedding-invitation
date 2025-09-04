@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StarRating } from "../../Util/ReviewStarRating";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import "../../Css/CustomerReview.css"; // 스타일 분리
 
 function CustomerReview() {
   const [reviews, setReviews] = useLocalStorage("customerReviews", [
@@ -41,6 +42,7 @@ function CustomerReview() {
       ],
     },
   ]);
+
   const [form, setForm] = useState({
     id: null,
     name: "",
@@ -49,45 +51,24 @@ function CustomerReview() {
     comment: "",
     photos: [],
   });
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-  const handleRating = (rating) => {
-    setForm({ ...form, rating });
-  };
-  const handleEdit = (review) => {
-    setForm(review);
-    setIsEdit(true);
-  };
   const [isEdit, setIsEdit] = useState(false);
-  const handleAddReview = (e) => {
-    e.preventDefault();
-    if (!form.name || !form.comment) return;
-    setReviews([...reviews, { ...form, id: Date.now() }]);
-    setForm({
-      id: null,
-      name: "",
-      date: "",
-      rating: 5,
-      comment: "",
-      photos: [],
-    });
-    setIsEdit(false);
-  };
-  const handleUpdateReview = (e) => {
-    e.preventDefault();
-    setReviews(reviews.map((r) => (r.id === form.id ? form : r)));
-    setForm({
-      id: null,
-      name: "",
-      date: "",
-      rating: 5,
-      comment: "",
-      photos: [],
-    });
-    setIsEdit(false);
-  };
-  const handlePhotoChange = (e) => {
+  const [photoOnly, setPhotoOnly] = useLocalStorage("photoOnlyFilter", false);
+
+  const filteredReviews = photoOnly
+    ? reviews.filter((r) => r.photos && r.photos.length > 0)
+    : reviews;
+
+  const getCurrentDate = () => new Date().toISOString().split("T")[0];
+
+  function handleChange(e) {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  }
+
+  function handleRating(rating) {
+    setForm({ ...form, rating });
+  }
+
+  function handlePhotoChange(e) {
     const files = Array.from(e.target.files);
     Promise.all(
       files.map(
@@ -104,114 +85,80 @@ function CustomerReview() {
         photos: [...prev.photos, ...photoUrls].slice(0, 5),
       }));
     });
-  };
-  const getCurrentDate = () => {
-    const today = new Date();
-    return today.toISOString().split("T")[0];
-  };
-  const handleDelete = (id) => {
+  }
+
+  function handleAddReview(e) {
+    e.preventDefault();
+    if (!form.name || !form.comment) return;
+    setReviews([
+      ...reviews,
+      { ...form, id: Date.now(), date: form.date || getCurrentDate() },
+    ]);
+    resetForm();
+  }
+
+  function handleUpdateReview(e) {
+    e.preventDefault();
+    setReviews(reviews.map((r) => (r.id === form.id ? form : r)));
+    resetForm();
+    setIsEdit(false);
+  }
+
+  function handleEdit(review) {
+    setForm(review);
+    setIsEdit(true);
+  }
+
+  function handleDelete(id) {
     setReviews(reviews.filter((r) => r.id !== id));
-  };
-  const handlePhotoRemove = (idx) => {
+  }
+
+  function handlePhotoRemove(idx) {
     setForm((prev) => ({
       ...prev,
       photos: prev.photos.filter((_, i) => i !== idx),
     }));
-  };
-  const [photoOnly, setPhotoOnly] = useLocalStorage("photoOnlyFilter", false);
-  const filteredReviews = photoOnly
-    ? reviews.filter((r) => r.photos && r.photos.length > 0)
-    : reviews;
+  }
+
+  function resetForm() {
+    setForm({
+      id: null,
+      name: "",
+      date: "",
+      rating: 5,
+      comment: "",
+      photos: [],
+    });
+    setIsEdit(false);
+  }
 
   return (
-    <div
-      style={{
-        maxWidth: "900px",
-        margin: "0 auto",
-        fontFamily: "'Noto Sans KR', '맑은 고딕', sans-serif",
-        background: "#fff",
-      }}
-    >
-      <h2
-        style={{
-          fontWeight: "bold",
-          fontSize: "1.5rem",
-          marginTop: "80px",
-          marginBottom: "10px",
-        }}
-      >
-        고객후기{" "}
-        <span style={{ color: "#fa7e12", fontWeight: "bold" }}>
-          {reviews.length}
-        </span>
+    <div className="cr-container">
+      <h2 className="cr-title">
+        고객후기 <span className="cr-count">{reviews.length}</span>
       </h2>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          marginBottom: "14px",
-          gap: "20px",
-        }}
-      >
-        {/* 가로 정렬: label 내 줄바꿈 없이 flex 적용 */}
-        <label
-          style={{
-            fontSize: "15px",
-            color: "#2c2c2c",
-            cursor: "pointer",
-            display: "flex",
-            alignItems: "center",
-            gap: "8px",
-            marginLeft: "0",
-            whiteSpace: "nowrap",
-          }}
-        >
+
+      <div className="cr-controls">
+        <label className="cr-photo-filter">
           <input
             type="checkbox"
             checked={photoOnly}
             onChange={() => setPhotoOnly((v) => !v)}
-            style={{
-              accentColor: "#fa7e12",
-            }}
-          />
+          />{" "}
           포토리뷰만 보기
         </label>
-        <div
-          style={{
-            marginLeft: "auto",
-            fontWeight: "bold",
-            fontSize: "15px",
-            display: "flex",
-            gap: "12px",
-          }}
-        ></div>
       </div>
-      {/* 등록/수정 폼 */}
+
       <form
+        className="cr-form"
         onSubmit={isEdit ? handleUpdateReview : handleAddReview}
-        style={{
-          marginBottom: "28px",
-          background: "#f9f9f9",
-          padding: "15px 12px",
-          borderRadius: "10px",
-          display: "flex",
-          alignItems: "center",
-          gap: "12px",
-          fontSize: "15px",
-          flexWrap: "wrap",
-        }}
       >
         <input
           name="name"
           value={form.name}
           onChange={handleChange}
+          className="cr-input name"
           placeholder="이름"
-          style={{
-            width: "120px",
-            padding: "8px",
-            borderRadius: "5px",
-            border: "1px solid #eee",
-          }}
         />
         <input
           name="date"
@@ -219,13 +166,7 @@ function CustomerReview() {
           value={form.date}
           onChange={handleChange}
           max={getCurrentDate()}
-          style={{
-            width: "140px",
-            padding: "8px",
-            borderRadius: "5px",
-            border: "1px solid #eee",
-            cursor: "pointer",
-          }}
+          className="cr-input date"
         />
         <StarRating rating={form.rating} setRating={handleRating} />
         <textarea
@@ -234,53 +175,24 @@ function CustomerReview() {
           onChange={handleChange}
           placeholder="후기"
           rows={2}
-          style={{
-            width: "340px",
-            resize: "none",
-            borderRadius: "5px",
-            border: "1px solid #eee",
-            padding: "8px",
-            fontSize: "15px",
-          }}
+          className="cr-textarea"
         />
         <input
           type="file"
           accept="image/*"
           multiple
           onChange={handlePhotoChange}
-          style={{ width: "110px" }}
+          className="cr-file-input"
         />
-        {form.photos && form.photos.length > 0 && (
-          <div style={{ display: "flex", gap: "6px", alignItems: "center" }}>
+        {form.photos.length > 0 && (
+          <div className="cr-thumb-preview">
             {form.photos.map((src, i) => (
-              <div key={i} style={{ position: "relative" }}>
-                <img
-                  src={src}
-                  alt=""
-                  style={{
-                    width: "44px",
-                    height: "44px",
-                    objectFit: "cover",
-                    borderRadius: "8px",
-                    border: "1px solid #eee",
-                  }}
-                />
+              <div key={i} className="cr-thumb-item">
+                <img src={src} alt={`미리보기${i}`} />
                 <button
                   type="button"
+                  className="cr-thumb-remove"
                   onClick={() => handlePhotoRemove(i)}
-                  style={{
-                    position: "absolute",
-                    top: -4,
-                    right: -4,
-                    fontSize: "12px",
-                    background: "#fff",
-                    color: "#999",
-                    border: "none",
-                    borderRadius: "50%",
-                    width: "18px",
-                    height: "18px",
-                    cursor: "pointer",
-                  }}
                 >
                   ×
                 </button>
@@ -288,147 +200,61 @@ function CustomerReview() {
             ))}
           </div>
         )}
-        <button
-          type="submit"
-          style={{
-            background: "#fa7e12",
-            color: "#fff",
-            border: "none",
-            borderRadius: "6px",
-            padding: "7px 16px",
-            fontWeight: "bold",
-            cursor: "pointer",
-          }}
-        >
+        <button type="submit" className="cr-btn add">
           {isEdit ? "수정" : "추가"}
         </button>
         {isEdit && (
-          <button
-            type="button"
-            onClick={() => {
-              setForm({
-                id: null,
-                name: "",
-                date: "",
-                rating: 5,
-                comment: "",
-                photos: [],
-              });
-              setIsEdit(false);
-            }}
-            style={{
-              background: "#eee",
-              color: "#333",
-              border: "none",
-              borderRadius: "6px",
-              padding: "7px 16px",
-              fontWeight: "bold",
-              cursor: "pointer",
-            }}
-          >
+          <button type="button" className="cr-btn cancel" onClick={resetForm}>
             취소
           </button>
         )}
       </form>
-      {/* 리뷰목록 */}
-      {filteredReviews.map((review, idx) => (
-        <div
-          key={review.id}
-          style={{
-            padding: "16px 0 18px 0",
-            borderBottom:
-              idx !== filteredReviews.length - 1 ? "1px solid #ededed" : "none",
-            display: "flex",
-            alignItems: "flex-start",
-            gap: "15px",
-          }}
-        >
-          <div style={{ width: "125px", paddingLeft: "8px" }}>
-            <StarRating rating={review.rating} />
-            <div
-              style={{
-                fontSize: "15px",
-                color: "#888",
-                margin: "3px 0 0 0",
-                fontWeight: "bold",
-              }}
-            >
-              {review.name}
+
+      <div className="cr-list">
+        {filteredReviews.map((review, idx) => (
+          <div key={review.id} className="cr-item">
+            <div className="cr-item-header">
+              <StarRating rating={review.rating} />
+              <div className="cr-meta">
+                <span className="cr-name">{review.name}</span>
+                <span className="cr-date">{review.date}</span>
+              </div>
             </div>
-            <div
-              style={{ fontSize: "13px", color: "#c2c2c2", marginTop: "10px" }}
-            >
-              {review.date}
-            </div>
-          </div>
-          <div style={{ flex: 1 }}>
-            <div
-              style={{
-                fontSize: "15px",
-                color: "#232323",
-                marginBottom: review.photos.length ? "10px" : "50px",
-              }}
-            >
-              {review.comment}
-            </div>
-            {review.photos && review.photos.length > 0 && (
-              <div style={{ display: "flex", gap: "8px", marginBottom: "7px" }}>
-                {review.photos.map((src, i) => (
-                  <img
-                    key={i}
-                    src={src}
-                    alt=""
-                    style={{
-                      width: "64px",
-                      height: "64px",
-                      borderRadius: "7px",
-                      border: "1px solid #ddd",
-                      objectFit: "cover",
-                    }}
-                  />
+            <p className="cr-comment">{review.comment}</p>
+
+            {review.photos.length > 0 && (
+              <div className="cr-photo-grid">
+                {review.photos.slice(0, 5).map((src, i) => (
+                  <div key={i} className="cr-photo-cell">
+                    <img
+                      src={src}
+                      alt={`리뷰${i}`}
+                      onClick={() => {
+                        /* 모달 오픈 로직 */
+                      }}
+                    />
+                  </div>
                 ))}
               </div>
             )}
-            <div
-              style={{
-                display: "flex",
-                gap: "7px",
-                fontSize: "13px",
-                marginTop: "4px",
-              }}
-            >
+
+            <div className="cr-actions">
               <button
                 onClick={() => handleEdit(review)}
-                style={{
-                  background: "#fff",
-                  color: "#ffa412",
-                  border: "1px solid #ffa412",
-                  borderRadius: "5px",
-                  padding: "2px 11px",
-                  cursor: "pointer",
-                  fontWeight: "bold",
-                }}
+                className="cr-btn edit"
               >
                 수정
               </button>
               <button
                 onClick={() => handleDelete(review.id)}
-                style={{
-                  background: "#fff",
-                  color: "#888",
-                  border: "1px solid #eee",
-                  borderRadius: "5px",
-                  padding: "2px 11px",
-                  cursor: "pointer",
-                  fontWeight: "bold",
-                }}
+                className="cr-btn delete"
               >
                 삭제
               </button>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

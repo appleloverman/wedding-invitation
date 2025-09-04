@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Petals } from "../../Util/Petals";
+import logomain from "../../art/logomain.png"; // logo5 이미지 경로
 
 function Header() {
   return (
@@ -14,16 +15,33 @@ function Header() {
         borderBottom: "1px solid #eee",
         zIndex: 9999,
         padding: "15px 0",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
       }}
     >
+      {/* 로고 영역 */}
+      <div style={{ marginLeft: "40px" }}>
+        <Link to="/">
+          <img
+            src={logomain}
+            alt="Logo"
+            style={{ height: "40px", cursor: "pointer" }}
+          />
+        </Link>
+      </div>
+
       <Petals />
+
+      {/* 네비게이션 메뉴 */}
       <nav
         style={{
           display: "flex",
           justifyContent: "center",
-          gap: "40px", // 메뉴 간격 넓게
+          gap: "40px",
           fontSize: "15px",
           fontWeight: "400",
+          flexGrow: 1,
         }}
       >
         {[
@@ -51,6 +69,9 @@ function Header() {
           </Link>
         ))}
       </nav>
+
+      {/* 오른쪽 여백용 빈 div */}
+      <div style={{ width: "60px", marginRight: "20px" }} />
 
       {/* Hover 애니메이션 스타일 */}
       <style>
