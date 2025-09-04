@@ -3,15 +3,25 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FormatAll } from "./FormatAll";
 import "../../Css/InvitationList.css";
-import logoImage from "../../art/logo.png"; // 이 경로가 맞는지 다시 확인해주세요.
+import logoImage from "../../art/logo.png";
 import PurchaseModal from "./PurchaseModal";
+import { loadInvList, saveInvList } from "../../Util/invStore";
 
-const InvitationList = ({ invitationList, setInvitationList }) => {
+const InvitationList = () => {
+  // 최초 진입 시 로컬스토리지에서만 로드 (필요 시 fallback 넣어도 됨)
+  const [invData, setInvData] = useState(() =>
+    loadInvList([
+      // 필요하면 여기에 초기 seed 데이터(배열) 넣기
+      // { ino: 1, date:"2025-09-01", time:"12:00", groomName:"홍길동", brideName:"김영희", bg:"#FFFFFF", title1:"소중한 분들을 초대합니다", content:"..." }
+    ])
+  );
+
   const [open, setOpen] = useState(false);
 
+  // 샘플 상품(구매 모달용)
   const product = {
-    id: "daycard-mobile-01",
-    title: "데이카드 모바일 청첩장",
+    id: "threeOrganic-mobile-01",
+    title: "ThreeOrganic 모바일 청첩장",
     price: 69000,
     salePrice: 49000,
     shippingFee: 0,
@@ -31,10 +41,14 @@ const InvitationList = ({ invitationList, setInvitationList }) => {
   };
 
   const onDelete = (ino) => {
-    setInvitationList((list) => list.filter((i) => i.ino !== ino));
+    setInvData((list) => {
+      const next = (list || []).filter((i) => i.ino !== ino);
+      saveInvList(next);
+      return next;
+    });
   };
 
-  if (!Array.isArray(invitationList) || invitationList.length === 0) {
+  if (!Array.isArray(invData) || invData.length === 0) {
     return (
       <div className="wl-page">
         <div className="wl-empty">
@@ -54,7 +68,7 @@ const InvitationList = ({ invitationList, setInvitationList }) => {
   return (
     <div className="wl-page">
       <div className="wl-grid">
-        {invitationList.map((i) => {
+        {invData.map((i) => {
           const f = FormatAll(i.date, i.time);
           const bg = i.bg || "#fff8f7";
           return (
@@ -66,7 +80,7 @@ const InvitationList = ({ invitationList, setInvitationList }) => {
               <div className="wl-ribbon">
                 <span>{f.dateSlash}</span>
               </div>
-              {/* i.cover가 있을 때와 없을 때 모두 로고를 커버 영역 안에 배치합니다. */}
+
               {i.cover ? (
                 <div className="wl-cover">
                   <img src={i.cover} alt="" loading="lazy" />
@@ -85,21 +99,25 @@ const InvitationList = ({ invitationList, setInvitationList }) => {
                   />
                 </div>
               )}
+
               <h1 className="wl-names">
                 <span className="wl-name">{i.groomName}</span>
                 <span className="wl-amp">&</span>
                 <span className="wl-name">{i.brideName}</span>
               </h1>
+
               <div className="wl-meta">
                 <div className="wl-dot" />
                 <span className="wl-datetime">{f.koDateTimeFull}</span>
                 <div className="wl-dot" />
               </div>
+
               <section className="wl-intro">
                 <p className="wl-tag">INVITATION</p>
                 {i.title1 && <h2 className="wl-title">{i.title1}</h2>}
                 {i.content && <p className="wl-body">{i.content}</p>}
               </section>
+
               <footer className="wl-actions">
                 <Link
                   to={`/InvitationEdit/${i.ino}`}
@@ -125,6 +143,7 @@ const InvitationList = ({ invitationList, setInvitationList }) => {
           );
         })}
       </div>
+
       <div className="wl-add-container">
         <Link
           to="/InvitationAdd"
@@ -133,6 +152,7 @@ const InvitationList = ({ invitationList, setInvitationList }) => {
           청첩장 추가하기
         </Link>
       </div>
+
       <PurchaseModal
         open={open}
         onClose={() => setOpen(false)}

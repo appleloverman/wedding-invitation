@@ -1,22 +1,30 @@
-import { useState } from "react";
+// src/components/InvitationAdd.jsx
+import React, { useMemo, useState } from "react";
 import { FormSections } from "./FormSections";
 import { Calendar } from "./Calendar";
-import "../../Css/InvitationAdd.css"; // 상위 폴더의 Css 경로
+import "../../Css/InvitationAdd.css";
 import { FormatAll } from "./FormatAll";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { loadInvList, saveInvList } from "../../Util/invStore";
 
 /* ================= 메인: InvitationAdd ================= */
-export default function InvitationAdd({ invitationList, setInvitationList }) {
-  // 초기 ino 계산
-  const getInitialIno = () => {
-    if (invitationList && invitationList.length > 0) {
-      const maxIno = Math.max(...invitationList.map((card) => card.ino));
+export default function InvitationAdd() {
+  const navigate = useNavigate();
+
+  // 1) 단일 소스: 로컬스토리지에서 기존 리스트 로드
+  const [invData, setInvData] = useState(() => loadInvList());
+
+  // 2) 신규 카드의 ino 계산 (현재 invData 기준)
+  const nextIno = useMemo(() => {
+    if (Array.isArray(invData) && invData.length > 0) {
+      const maxIno = Math.max(...invData.map(({ ino }) => ino || 0));
       return maxIno + 1;
     }
     return 1;
-  };
+  }, [invData]);
 
-  const [ino, setIno] = useState(getInitialIno);
+  // 3) 신규 카드 입력 상태
+  const [ino] = useState(nextIno);
   const [date, setDate] = useState("2025-09-01");
   const [time, setTime] = useState("12:00");
   const [groomName, setGroomName] = useState("홍길동");
@@ -40,12 +48,22 @@ export default function InvitationAdd({ invitationList, setInvitationList }) {
 
   const fmt = FormatAll(date, time);
 
-  const setInvitationHandler = () => {
-    setInvitationList((prev) => [
-      ...(prev || []),
-      { ino, date, time, groomName, brideName, bg, title1, content },
-    ]);
-    // 목록 화면으로 이동하므로 여기서 ino 증가/리셋은 생략
+  // 4) 추가 핸들러: 로컬 상태 + 로컬스토리지에 저장 후 목록으로 이동
+  const handleAdd = () => {
+    const newItem = {
+      ino,
+      date,
+      time,
+      groomName,
+      brideName,
+      bg,
+      title1,
+      content,
+    };
+    const addedData = [...(invData || []), newItem];
+    setInvData(addedData);
+    saveInvList(addedData);
+    navigate("/InvitationList");
   };
 
   return (
@@ -54,7 +72,10 @@ export default function InvitationAdd({ invitationList, setInvitationList }) {
       <div key={ino} className="preview-pane ie-preview">
         <div className="phone-frame" aria-label="모바일 청첩장 미리보기">
           <div className="phone-notch" aria-hidden="true" />
-          <div className="phone-canvas" style={{ "--preview-bg": bg }}>
+          <div
+            className="phone-canvas"
+            style={{ ["--preview-bg"]: bg }} // CSS 변수 안전 지정
+          >
             <div className="phone-scroll">
               {/* 상단 날짜/요일 */}
               <div className="section section--tight text-center">
@@ -130,13 +151,9 @@ export default function InvitationAdd({ invitationList, setInvitationList }) {
         />
 
         <div className="sticky-actions">
-          <Link
-            to="/InvitationList"
-            className="btn btn-primary"
-            onClick={setInvitationHandler}
-          >
+          <button type="button" className="btn btn-primary" onClick={handleAdd}>
             추가하기
-          </Link>
+          </button>
           <Link to="/InvitationList" className="btn btn-ghost">
             목록으로
           </Link>

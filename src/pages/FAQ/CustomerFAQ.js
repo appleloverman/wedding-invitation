@@ -3,6 +3,7 @@ import "../../Css/CustomerFAQ.css";
 import { Petals } from "../../Util/Petals";
 import { useNavigate } from "react-router-dom";
 import { askData } from "../../data/FaqData";
+import { abc } from "../../data/FaqData";
 
 const CustomerFAQ = () => {
   const [search, setSearch] = useState(""); // 검색 키워드 필터

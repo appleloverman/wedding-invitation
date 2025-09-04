@@ -1,27 +1,31 @@
-// src/components/InvitationEdit2.jsx
+// src/components/InvitationEdit.jsx
 import React, { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { FormatAll } from "./FormatAll";
 import { Calendar } from "./Calendar";
 import { FormSections } from "./FormSections";
-import "../../Css/InvitationAdd.css"; // InvitationAdd.css 재사용
+import "../../Css/InvitationAdd.css"; // 기존 스타일 재사용
+import { loadInvList, saveInvList } from "../../Util/invStore";
 
-const InvitationEdit = ({ invitationList = [], setInvitationList }) => {
+const InvitationEdit = () => {
   const { ino } = useParams();
   const inoNum = useMemo(() => Number(ino), [ino]);
   const navigate = useNavigate();
 
-  // 기존 청첩장 데이터 찾기
+  // 단일 소스: 로컬스토리지에서 로드
+  const [invData, setInvData] = useState(() => loadInvList());
+
+  // 편집 대상 찾기 (항상 invData에서 find)
   const existing = useMemo(
-    () => invitationList.find((card) => card.ino === inoNum),
-    [invitationList, inoNum]
+    () => invData.find((card) => card.ino === inoNum),
+    [invData, inoNum]
   );
 
   useEffect(() => {
     if (!existing) navigate("/InvitationList");
   }, [existing, navigate]);
 
-  // 상태
+  // 폼 상태 (existing 기반 초기값)
   const [date, setDate] = useState(existing?.date || "2025-09-01");
   const [time, setTime] = useState(existing?.time || "12:00");
   const [groomName, setGroomName] = useState(existing?.groomName || "홍길동");
@@ -48,17 +52,21 @@ const InvitationEdit = ({ invitationList = [], setInvitationList }) => {
 
   const fmt = FormatAll(date, time);
 
-  // 저장
+  // 저장(업데이트)
   const handleUpdate = () => {
-    setInvitationList((prev) =>
-      (prev || []).map((card) =>
+    setInvData((prev) => {
+      const updatedData = (prev || []).map((card) =>
         card.ino === inoNum
           ? { ...card, date, time, groomName, brideName, bg, title1, content }
           : card
-      )
-    );
+      );
+      saveInvList(updatedData);
+      return updatedData;
+    });
     navigate("/InvitationList");
   };
+
+  if (!existing) return null; // 짧은 가드
 
   return (
     <div className="invitation-edit ie-page">
@@ -66,7 +74,10 @@ const InvitationEdit = ({ invitationList = [], setInvitationList }) => {
       <div className="preview-pane ie-preview">
         <div className="phone-frame" aria-label="모바일 청첩장 미리보기">
           <div className="phone-notch" aria-hidden="true" />
-          <div className="phone-canvas" style={{ "--preview-bg": bg }}>
+          <div
+            className="phone-canvas"
+            style={{ ["--preview-bg"]: bg }} // CSS 변수 지정
+          >
             <div className="phone-scroll">
               {/* 상단 날짜/요일 */}
               <div className="section section--tight text-center">
@@ -74,7 +85,7 @@ const InvitationEdit = ({ invitationList = [], setInvitationList }) => {
                 <h2 className="meta meta--upper">{fmt.weekdayUpperEn}</h2>
               </div>
 
-              {/* 이름 */}
+              {/* 신랑/신부 이름 */}
               <p className="names">
                 <span className="name">{groomName}</span>
                 <span className="dot">·</span>
