@@ -16,7 +16,7 @@ function Login() {
       </div>
       <h1 className="text-2xl font-bold mb-2">로그인에 실패하였습니다</h1>
       <p className="text-sm text-gray-600 mb-4">
-        입력하신 정보가 올바른지 확인해주세요. 문제가 지속되면 고객센터에
+        서버에 이용자가 많아 로그인에 실패하였습니다. 문제가 지속되면 고객센터에
         문의해주세요.
       </p>
       <button
