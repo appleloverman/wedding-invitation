@@ -22,10 +22,10 @@ function Home() {
   }, []); // 마운트 시 한 번만 실행
 
   const slideImages = [
-    "https://d38fyys32noduv.cloudfront.net/commons/card_sample/XiWvmigDIO.png",
-    "https://d38fyys32noduv.cloudfront.net/commons/card_sample/BgIftGNgps.png",
-    "https://d38fyys32noduv.cloudfront.net/commons/card_sample/dXHF8IHgPT.png",
-    "https://d38fyys32noduv.cloudfront.net/commons/card_sample/IhMIUxYKKt.png",
+    "https://d38fyys32noduv.cloudfront.net/commons/card_sample/pZnBPq30sQ.png?v=1757034460",
+    "https://d3ole9s3lu0l4.cloudfront.net/images/mcards/1006/mcard_1006_0_2023-01-23_943313.jpeg",
+    "https://d38fyys32noduv.cloudfront.net/commons/card_sample/Wu5zX7F7CO.png?v=1757034460",
+    "https://d3ole9s3lu0l4.cloudfront.net/images/mcards/1007/mcard_1007_0_2023-01-23_335136.jpeg",
     // 원하는 이미지를 추가하세요
   ];
 
@@ -97,7 +97,7 @@ function Home() {
         >
           <Link to="/InvitationCards">
             <img
-              src="https://media.istockphoto.com/id/2200796955/ko/%EC%82%AC%EC%A7%84/wedding-portraits-of-a-young-man-and-woman-shot-indoors.jpg?s=2048x2048&w=is&k=20&c=qKApoYi5FxBBjMlwNPjzDE0Xjg9Ea-Ua_Py9LDTbcOU="
+              src="https://d38fyys32noduv.cloudfront.net/commons/card_sample/IhMIUxYKKt.png"
               alt="청첩장 샘플 목록으로 이동"
               style={{
                 cursor: "pointer",
@@ -109,7 +109,7 @@ function Home() {
           </Link>
           <Link to="/InvitationCards">
             <img
-              src="https://cdn.pixabay.com/photo/2015/02/13/00/15/wedding-634526_640.jpg"
+              src="https://d38fyys32noduv.cloudfront.net/commons/card_sample/BgIftGNgps.png"
               alt="청첩장 샘플 목록으로 이동"
               style={{
                 cursor: "pointer",
