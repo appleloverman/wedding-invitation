@@ -14,22 +14,11 @@ function useLockBodyScroll(lock) {
 
 const currency = (n) => (n ?? 0).toLocaleString("ko-KR");
 
-const DEFAULT_DESIGN_IMAGES = {
-  classic:
-    "https://d38fyys32noduv.cloudfront.net/commons/card_sample/XiWvmigDIO.png",
-  blush:
-    "https://d38fyys32noduv.cloudfront.net/commons/card_sample/BgIftGNgps.png",
-  minimal:
-    "https://d38fyys32noduv.cloudfront.net/commons/card_sample/dXHF8IHgPT.png",
-  modern:
-    "https://d38fyys32noduv.cloudfront.net/commons/card_sample/IhMIUxYKKt.png",
-};
-
 export default function PurchaseModal({
   open,
   onClose,
   product,
-  designImages: designImagesProp, // 선택된 디자인에 따른 이미지 맵 (선택)
+  designImages, // 선택된 디자인에 따른 이미지 맵 (선택)
 }) {
   const navigate = useNavigate();
   useLockBodyScroll(open);
@@ -59,9 +48,6 @@ export default function PurchaseModal({
 
   if (!open) return null;
 
-  // 디자인별 이미지 맵 (prop이 없으면 기본값 사용)
-  const designImages = designImagesProp ?? DEFAULT_DESIGN_IMAGES;
-
   const unit = product.salePrice ?? product.price ?? 0;
   const shipping = product.shippingFee ?? 0;
   const subtotal = unit * qty;
@@ -78,8 +64,9 @@ export default function PurchaseModal({
   const addToCart = () => {
     if (!canSubmit) return;
 
-    const keyBase = product.id || product.sku || product.title || "product";
+    const keyBase = product.id || product.title || "product";
     const key = `${keyBase}__${design}__${envelope}`;
+    console.log(key);
 
     addItem({
       key,
@@ -105,7 +92,7 @@ export default function PurchaseModal({
       />
       <div
         className="relative w-full sm:w-[720px] max-h-[92vh] overflow-auto rounded-2xl bg-white shadow-xl"
-        onClick={(e) => e.stopPropagation()}
+        // onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         <div className="sticky top-0 z-10 flex items-center justify-between border-b border-gray-100 bg-white px-5 py-4">

@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from "react";
 import "../../Css/Inquiry.css";
 
-// onMoveToList props 추가
+// InquiryPage 부모컴포넌트
 const Inquiry = ({ onSubmit, editData, onMoveToList }) => {
+  //InquiryPage에서 해당 기능을 디스트럭쳐링 해서 value(값)을 받아옴
   const [userName, setUserName] = useState("");
   const [userTitle, setUserTitle] = useState("");
   const [userEmail, setUserEmail] = useState("");
@@ -40,7 +41,7 @@ const Inquiry = ({ onSubmit, editData, onMoveToList }) => {
       name: userName,
       title: userTitle,
       email: userEmail,
-      comment: userComment
+      comment: userComment,
     };
     onSubmit(newInquiry);
     // 3. 만든 상자를 부모 컴포넌트로 보냅니다.
@@ -99,7 +100,7 @@ const Inquiry = ({ onSubmit, editData, onMoveToList }) => {
               borderRadius: "5px",
               border: "1px solid #ddd",
               fontSize: "16px",
-              resize: "vertical"
+              resize: "vertical",
             }}
           />
         </label>

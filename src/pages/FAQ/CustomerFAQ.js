@@ -5,58 +5,37 @@ import { useNavigate } from "react-router-dom";
 import { askData } from "../../data/FaqData";
 
 const CustomerFAQ = () => {
-  const [search, setSearch] = useState(""); // 검색 키워드 필터
-  const [searchMenu, setSearchMenu] = useState(null); // 메뉴 필터
-  const [select, setSelect] = useState(null); // 질문 토글 상태
-
+  const [searchKeyword, setSearchKeyword] = useState(""); // 검색 키워드 필터
+  const [titleMenu, setTiltleMenu] = useState(null); // 메뉴 필터
+  const [selectId, setSelectId] = useState(false); // 질문 토글 상태
   const navigate = useNavigate(); // ✅ React Router navigate 이동 기능
 
-  // 필터된 데이터
+  // 필터를 적용 시킨 데이터
   const filteredData = askData.filter(
-    (i) => i.comment.includes(search) && (!searchMenu || i.title === searchMenu)
+    (askData) =>
+      askData.comment.includes(searchKeyword) &&
+      // 기존데이터 commeent에 includes를 사용해서 searchKeyword의 문자가 포함되어있는지를 확인 있으면 true 이고
+      (!titleMenu || askData.title === titleMenu)
+    // 다음으로 titleMenu가 Null이 아닐때는 searchKeyword만 filteredData에 저장되고
+    // titleMune가 null이면 false 이므로 우측조건을 검증 => 기존데이터의 title값이 titleMenu의 값과 같은값만 filteredData에 저장
   );
-  // .filter() 메서드를 사용하여 askData 배열의 각 항목(i)을 하나씩 접근
-  // 조건 1) i.comment.includes(search)
-  // askData 배열의 각 항목(i)에서 'comment'(내용) 필드에 접근하고
-  // .includes(search) 메서드를 사용하여 'comment'에 search(검색창에 입력된 값)이 포함되어 있는지 확인
-  // 그리고, 이 조건이 '참(true)'일 때만 다음 조건으로 넘어감
-  // (includes()는 특정 문자열에 특정 문자열이 포함되어 있는지 확인하는 기능)
 
-  // 조건 2) !searchMenu || i.title === searchMenu
-  // 이 조건은 '논리 OR(||)' 연산자로 연결되어 있음
-  // 첫 번째 부분(!searchMenu)은 'searchMenu' 상태가 비어있거나 'null', 'undefined'일 때 '참(true)'가 된다
-  // '참'인 경우, 두 번째 부분(i.title === searchMenu)은 무시하고 전체 조건이 '참'이 된다.
-  // (즉, 카테고리를 선택하지 않았을 때는 검색어만으로 필터링된다)
-  // 두 번째 부분은 'searchMenu' 상태에 값이 있을 때 동작
-  // 이 경우, 'i.title'(데이터의 제목)이 'searchMenu'와 정확히 일치하는지 확인.
-  // 최종적으로 두 조건(condition 1 && condition 2)을 모두 만족하는 데이터만
-  // filteredData 변수에 askData 배열을 필터링한 결과가 담음
-
-  // 질문 클릭
-  const handleClick = (i) => {
-    setSelect(select === i.id ? null : i.id);
+  // 질문리스트 클릭
+  const handleinquiryListClick = (askData) => {
+    // 질문리스트를 클릭하면 해당 핸들러는  askData라는 데이터를 인자로 받고
+    setSelectId(askData.id === selectId ? null : askData.id);
+    // 해당 객체데이터의 키값인 id가 selectId와 동일하면 null값을, 그렇지 않으면 기존데이터값을 반환
   };
-  // `setSelect` State함수를 사용하여 `select` 상태를 업데이트한다
-  // 이 업데이트는 클릭한 항목의 ID를 기준으로 토글(켜고 끄기)하는 역할을 한다.
-  // 삼항 연산자(ternary operator)를 사용한 조건부 업데이트 :
-  // ■ 전체코드 => (select === i.id ? null : i.id);
-  // select === i.id
-  // `select` 현재 상태와 클릭된 항목(i)의 ID가 같은지 확인합니다.
-  // 조건이 'true'일 때:
-  // 현재 선택된 항목을 다시 클릭한 경우입니다.
-  // 'null' 값을 할당하여 선택을 해제합니다.
-  // ? null
-  // 조건이 'false'일 때:
-  // 현재 선택된 항목이 없거나, 다른 항목을 클릭한 경우입니다.
-  // 클릭된 항목(i)의 ID를 새로운 'select' 값으로 할당하여 해당 항목을 선택합니다.
 
   // 메뉴 클릭
-  const handleClickMenu = (title) => {
-    setSearchMenu(title);
+  const handleMenuClick = (title) => {
+    // 해당 핸들러는 title 인자를 받을 것이고
+    setTiltleMenu(title);
+    // 그 title을 titleMenu라는 스테이트로 업데이트
   };
 
   // 문의하기 버튼 클릭
-  const handleInquiryClick = () => {
+  const handleNavigateToInquiry = () => {
     navigate("/FAQquery");
   };
 
@@ -89,17 +68,21 @@ const CustomerFAQ = () => {
         {/* 메뉴 버튼 */}
         <div className="faq-menu-buttons">
           {["전체보기", "주문", "제품", "배송", "적립", "회원", "기타"].map(
+            // 해당 배열을 Map을 사용해서 순회
             (title) => (
+              // title이라는 인자를 받을 건데
               <button
-                key={title}
+                key={title} // 여기서 key값을 title로 준다 *안전성의 이유
                 className={`faq-menu-button ${
-                  searchMenu === title ||
-                  (title === "전체보기" && searchMenu === null)
-                    ? "active"
-                    : ""
+                  title === titleMenu || // title가 titleMenu과 같으면 true 뒤에 조건은 실행하지않음
+                  (title === "전체보기" && titleMenu === false) // 조건2 title이 전체보기와 같고, searchMenu가 null 이면 true
+                    ? "active" // 버튼에 "active 클래스" 를 적용
+                    : "" // 아무것도 일어나지않음
                 }`}
-                onClick={() =>
-                  handleClickMenu(title === "전체보기" ? null : title)
+                onClick={
+                  () =>
+                    handleMenuClick(titleMenu === "전체보기" ? false : title)
+                  // 버튼을 누르면 titleMenu가 전체보기와 동일하면 false를 , 그렇지 않으면 title을 반환 여기서 title은 위 배열에 해당한다
                 }
               >
                 {title}
@@ -110,7 +93,8 @@ const CustomerFAQ = () => {
           {/* ✅ 문의하기 버튼만 navigate로 처리 */}
           <button
             className="faq-menu-button inquiry-button"
-            onClick={handleInquiryClick}
+            onClick={handleNavigateToInquiry}
+            // 해당 버튼을 클릭하면 Inquiry주소로 이동
           >
             문의하기
           </button>
@@ -121,26 +105,38 @@ const CustomerFAQ = () => {
           <input
             type="text"
             placeholder="궁금한 키워드를 입력해주세요"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            value={searchKeyword}
+            onChange={(e) => setSearchKeyword(e.target.value)}
+            // 해당 이벤트는 serachKeyword의 값을 해당 입력창에 입력된 value로 업데이트한다.
           />
         </div>
 
         {/* 질문 리스트 */}
         <div className="faq-list">
           {filteredData.length === 0 ? (
+            // filteredData에 문자열길이가 0이면 검색결과가없습니다 를 반환
             <div className="faq-empty">검색 결과가 없습니다.</div>
           ) : (
-            filteredData.map((i) => (
-              <div key={i.id} className="faq-item">
-                <div className="faq-question" onClick={() => handleClick(i)}>
-                  <span className="faq-q-icon">Q</span> {i.comment}
+            // 그렇지 않다면, 0이 아닌 문자열의 길이가 존재한다면
+            filteredData.map((askData) => (
+              // 해당 필터된 데이터를 순회
+              <div key={askData.id} className="faq-item">
+                {/* key 값은 해당 데이터의 id로 지정 *안전성의 이유 */}
+                <div
+                  className="faq-question"
+                  onClick={() => handleinquiryListClick(askData)}
+                  // 해당 영역을 클릭하면 핸들이벤트가 발생하고 해당 데이터를 보냄
+                  // selectId의 스테이트를 해당 데이터로 업데이트
+                >
+                  <span className="faq-q-icon">Q</span> {askData.comment}
                   <span className="faq-toggle-icon">
-                    {select === i.id ? "▲" : "▼"}
+                    {selectId === askData.id ? "▲" : "▼"}
+                    {/* selectId가 필터된 데이터의 id가 동일하면  ▲ 그렇지 않으면  ▼ 로 변경*/}
                   </span>
                 </div>
-                {select === i.id && (
-                  <div className="faq-answer">{i.answer}</div>
+                {selectId === askData.id && (
+                  // 해당 영역을 클릭했을때 selectId의 데이터가 인자로받은 데이터의 id와 동일하면 새로운 영역을 보여줌
+                  <div className="faq-answer">{askData.answer}</div>
                 )}
               </div>
             ))
