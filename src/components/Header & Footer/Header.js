@@ -1,7 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Petals } from "../../Util/Petals";
+
 import logomain from "../../art/logomain.png"; // logo5 이미지 경로
+import { Petals } from "../../Util/Petals";
 
 function Header() {
   return (

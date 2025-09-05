@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "../../Css/CustomerFAQ.css";
-import { Petals } from "../../Util/Petals";
+
 import { useNavigate } from "react-router-dom";
 import { askData } from "../../data/FaqData";
+import { Petals } from "../../Util/Petals";
 
 const CustomerFAQ = () => {
   const [searchKeyword, setSearchKeyword] = useState(""); // 검색 키워드 필터

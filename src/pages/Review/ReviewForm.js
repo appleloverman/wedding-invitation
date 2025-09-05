@@ -36,6 +36,7 @@ function ReviewForm({ initialData, onSubmit, onCancel }) {
   // 오늘 날짜를 YYYY-MM-DD 문자열로 반환하는 함수
   // date input의 max 속성에 사용 → 미래 날짜 선택 방지
   const getCurrentDate = () => {
+    //이해 완료
     // ISO 문자열 포맷 "2025-09-04T06:27:00.000Z" 에서 날짜 부분만 취함
     return new Date().toISOString().split("T")[0];
   };
@@ -43,6 +44,7 @@ function ReviewForm({ initialData, onSubmit, onCancel }) {
   // 텍스트(input, textarea) 변경 시 호출
   // e.target.name에 해당하는 속성 (name, date, comment)에 값을 설정
   const handleChange = (e) => {
+    //아리 까리
     const { name, value } = e.target;
     setReview((prev) => ({
       ...prev, // 기존 상태 유지
@@ -53,6 +55,7 @@ function ReviewForm({ initialData, onSubmit, onCancel }) {
   // StarRating 컴포넌트에서 별점 클릭 시 호출
   // rating 값을 review 상태에 반영
   const handleRating = (rating) => {
+    //이해 완료
     setReview((prev) => ({
       ...prev,
       rating, // 클릭한 별점으로 업데이트
@@ -62,6 +65,7 @@ function ReviewForm({ initialData, onSubmit, onCancel }) {
   // 사진 파일 선택 시 호출
   // FileReader를 이용해 파일을 Base64 URL로 변환 후 photos 배열에 추가
   const handlePhotoChange = (e) => {
+    //...?
     // 다중 파일 선택 지원: FileList → 배열
     const files = Array.from(e.target.files);
 
@@ -89,6 +93,7 @@ function ReviewForm({ initialData, onSubmit, onCancel }) {
 
   // 특정 인덱스의 사진을 제거할 때 호출
   const handlePhotoRemove = (idx) => {
+    //_가 url인지만 확인하면
     setReview((prev) => ({
       ...prev,
       // filter로 idx와 다른 항목만 남김

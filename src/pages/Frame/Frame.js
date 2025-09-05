@@ -36,7 +36,7 @@ export default function Frame() {
       unitPrice: unit,
       qty,
       options: {},
-      image: item.image
+      image: item.image,
     });
 
     navigate("/cartList");
@@ -103,6 +103,10 @@ export default function Frame() {
                 <div className="cta-wrap">
                   <button
                     className="w-full rounded-xl bg-black text-white px-4 py-2 font-medium hover:opacity-90 transition"
+                    style={{
+                      backgroundColor: "#F6F6F6",
+                      color: "#444444",
+                    }}
                     onClick={() => addAndGo(item)}
                   >
                     담고 이동
