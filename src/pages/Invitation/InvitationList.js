@@ -70,7 +70,7 @@ const InvitationList = () => {
       <div className="wl-grid">
         {invData.map((i) => {
           const f = FormatAll(i.date, i.time);
-          const bg = i.bg || "#fff8f7";
+          const bg = i.bg || "#ffffff";
           return (
             <article
               key={i.ino}
@@ -81,24 +81,13 @@ const InvitationList = () => {
                 <span>{f.dateSlash}</span>
               </div>
 
-              {i.cover ? (
-                <div className="wl-cover">
-                  <img src={i.cover} alt="" loading="lazy" />
-                  <img
-                    src={logoImage}
-                    alt="THREE ORGANIC 로고"
-                    className="wl-logo-in-card"
-                  />
-                </div>
-              ) : (
-                <div className="wl-cover wl-cover--pattern" aria-hidden="true">
-                  <img
-                    src={logoImage}
-                    alt="THREE ORGANIC 로고"
-                    className="wl-logo-in-card"
-                  />
-                </div>
-              )}
+              <div className="wl-cover wl-cover--pattern" aria-hidden="true">
+                <img
+                  src={logoImage}
+                  alt="THREE ORGANIC 로고"
+                  className="wl-logo-in-card"
+                />
+              </div>
 
               <h1 className="wl-names">
                 <span className="wl-name">{i.groomName}</span>
