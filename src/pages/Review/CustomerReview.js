@@ -34,7 +34,7 @@ const initialReviews = [
   },
   {
     id: 4,
-    name: "이재오",
+    name: "김찬우",
     date: "2025-08-27",
     rating: 5,
     comment: "강추합니다!",
