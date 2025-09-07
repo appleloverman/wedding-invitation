@@ -128,7 +128,7 @@ export default function Letter() {
                     style={
                       item.soldOut
                         ? {}
-                        : { backgroundColor: "#F6F6F6", color: "#444444" }
+                        : { backgroundColor: "black", color: "white" }
                     }
                     onClick={() => addAndGo(item)}
                   >
