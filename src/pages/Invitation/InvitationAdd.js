@@ -74,7 +74,7 @@ export default function InvitationAdd() {
           <div className="phone-notch" aria-hidden="true" />
           <div
             className="phone-canvas"
-            style={{ ["--preview-bg"]: bg }} // CSS 변수 안전 지정
+            style={{ "--preview-bg": bg }} // CSS 변수 안전 지정
           >
             <div className="phone-scroll">
               {/* 상단 날짜/요일 */}
